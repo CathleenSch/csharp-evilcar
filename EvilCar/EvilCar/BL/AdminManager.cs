@@ -14,12 +14,18 @@ namespace EvilCar.BL
         private static string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) , @"Database\user.xml");
         private XmlManager userDatabaseManager;
 
+        //Constructor
         public AdminManager()
         {            
             userDatabaseManager = new XmlManager(path);
         }
 
         #region administrateAdmins
+        /*
+         * Includes all functions to do with the administration of fellow administrators
+         * - CreateNewAdmin
+         * - ReadAdminInfos
+         */
         public void CreateNewAdmin()
         {
             Console.WriteLine("You are creating a new Admin.");
@@ -35,6 +41,12 @@ namespace EvilCar.BL
         #endregion
 
         #region administerFleetManager
+        /*
+         * Includes all functions to do with the administration of fleet Managers
+         * - CreateNewAFleetManager
+         * - ReadfleetManagerInfos
+         * - ChangeFleetManagerPassword
+         */
         public void CreateNewFleetManager()
         {
             Console.WriteLine("You are creating a new Fleet Manager.");
@@ -49,6 +61,10 @@ namespace EvilCar.BL
         #endregion
 
         #region administerSelf
+        /*
+         * Self service region.
+         * - updateOwnProfile Information: firsName, lastName, userName, password
+         */
         public void updateOwnProfile(Guid id)
         {
             Console.WriteLine("You choose to update your own profile.");
@@ -57,6 +73,10 @@ namespace EvilCar.BL
         #endregion
 
         #region administerBranch
+        /*
+         * Branch administration
+         * - createNewBranch
+         */
         public void createNewBranch()
         {
             string name;
@@ -68,7 +88,8 @@ namespace EvilCar.BL
         #endregion
 
         #region HelperFunctions
-        //Some private Helper Funktions
+        //Some private Helper Functions
+        //to handle business logic and communication with xml manager
         private void newUser(EvilCarUser.UserType type)
         {
             string firstName;
@@ -88,7 +109,7 @@ namespace EvilCar.BL
             Console.WriteLine("Succesfully created a new {0} User: {1}, {2} ({3})", type, lastName, firstName, userName);
         }
 
-        //Fetch information about a user
+        //Fetch information about a user, using their username
         //using the XMLManager to access the userDB xml file
         //handles spelling errors
         private void fetchUserInfo(string type)
@@ -114,6 +135,7 @@ namespace EvilCar.BL
 
         }
 
+        //Access User in DB file via their id and change their information
         private void changeUserInfo(Guid id, string type)
         {
             char selection;
