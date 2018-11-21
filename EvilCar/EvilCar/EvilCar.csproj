@@ -42,19 +42,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\AdminManager.cs" />
     <Compile Include="BL\LoginManager.cs" />
+    <Compile Include="BL\XmlManager.cs" />
     <Compile Include="DL\Branch.cs" />
     <Compile Include="DL\Car.cs" />
     <Compile Include="DL\Customer.cs" />
     <Compile Include="DL\Fleet.cs" />
     <Compile Include="DL\Services.cs" />
-    <Compile Include="DL\User.cs" />
+    <Compile Include="DL\EvilCarUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Database\cars.xml" />
+    <Content Include="Database\fleet.xml" />
+    <Content Include="Database\user.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

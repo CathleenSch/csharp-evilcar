@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<userDB>
+  <adminCollection>
+    <admin firstName="System" lastName="Admin" guid="663E75E3-6081-4B83-9851-D052E0B2CEB8" password="cHcxMjM0" userName="SysAdmin"></admin>
+  </adminCollection>
+  <managerCollection>
+    <manager firstName="System" lastName="Manager" guid="84B47E6C-4C99-4969-B13B-3063AF8DE9CF" password="cHc0MzIx" userName="SysManager"></manager>
+  </managerCollection>
+  <customerCollection>
+    <customer firstName="System" lastName="Customer" guid="9D3054C9-70A2-4059-AC8E-FDF1D303D349"></customer>
+  </customerCollection>
+</userDB>

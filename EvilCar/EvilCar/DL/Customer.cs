@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvilCar.DL
 {
-    class Customer : User
+    class Customer : EvilCarUser
     {
      
         private Guid rentedCar;
@@ -19,9 +19,6 @@ namespace EvilCar.DL
             userType = UserType.CUSTOMER;
         }
 
-        public string FirstName { get => firstName; set => firstName = value; }
-        public string LastName { get => lastName; set => lastName = value; }
-        public Guid CustomerID { get => userID;}
         public Guid RentedCar { get => rentedCar; set => rentedCar = value; }
         public int TotalCostOfCurrentRental { get => totalCostOfCurrentRental; set => totalCostOfCurrentRental = value; }
         public DateTime RentStartDate { get => rentStartDate; set => rentStartDate = value; }

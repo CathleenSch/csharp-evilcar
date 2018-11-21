@@ -10,7 +10,7 @@ namespace EvilCar.BL {
         private string role;
         
 
-        protected register () {
+        protected void register () {
             Console.WriteLine("Please enter your username:");
             username = Console.ReadLine();
             Console.WriteLine("This is your chosen username: " + username);

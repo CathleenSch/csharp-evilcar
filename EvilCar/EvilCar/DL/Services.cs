@@ -8,33 +8,19 @@ namespace EvilCar.DL
 {
     class Services
     {
-        private String nameofService;
+        private string nameofService;
         private int pricePerBooking;
-        private String description;
+        private string description;
 
-        public String getNameOfService()
+        public Services(string name, int price)
         {
-            return nameofService;
-        }
-
-        public int getPricePerBooking()
-        {
-            return pricePerBooking;
-        }
-
-        public String getDescription()
-        {
-            return description;
-        }
-
-        public void setPricePerBooking(int price)
-        {
+            nameofService = name;
             pricePerBooking = price;
         }
 
-        public void setDescription(String description)
-        {
-            this.description = description
-        }
+        public string Name { get => nameofService; set => nameofService = value; }
+        public int Pricing { get => pricePerBooking; set => pricePerBooking = value; }
+        public string Description { get => description; set => description = value; }
+
     }
 }

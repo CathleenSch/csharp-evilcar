@@ -24,28 +24,9 @@ namespace EvilCar.DL
             typeCar = type;
         }
 
-        public Status getStatus() {
-            return statusCar;
-        }
+        public Status CarStatus { get => statusCar; set => statusCar = value; }
+        public int PricePerHour { get => pricePerHour; set => pricePerHour = value; }
+        public TypeOfCar CarType { get => typeCar}
 
-        public void setStatus(Status status)
-        {
-            statusCar = status;
-        }
-
-        public int getPricePerHour()
-        {
-            return pricePerHour;
-        }
-
-        public void setPricePerHour(int price)
-        {
-            pricePerHour = price;
-        }
-
-        public TypeOfCar getTypeOf()
-        {
-            return typeCar;
-        }
     }
 }
