@@ -42,17 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\LoginManager.cs" />
+    <Compile Include="DL\Branch.cs" />
     <Compile Include="DL\Car.cs" />
     <Compile Include="DL\Customer.cs" />
+    <Compile Include="DL\Fleet.cs" />
     <Compile Include="DL\Services.cs" />
+    <Compile Include="DL\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

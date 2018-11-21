@@ -6,26 +6,22 @@ using System.Threading.Tasks;
 
 namespace EvilCar.DL
 {
-    class Customer
+    class Customer : User
     {
-        private String firstName;
-        private String lastName;
-        private Guid customerID;
+     
         private Guid rentedCar;
         private int totalCostOfCurrentRental;
         private DateTime rentStartDate;
         private DateTime rentEndDate;
 
-        public Customer(String fName, String lName)
+        public Customer(string firstName, string lastName): base(firstName, lastName)
         {
-            firstName = fName;
-            lastName = lName;
-            customerID = Guid.NewGuid();
+            userType = UserType.CUSTOMER;
         }
 
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
-        public Guid CustomerID { get => customerID;}
+        public Guid CustomerID { get => userID;}
         public Guid RentedCar { get => rentedCar; set => rentedCar = value; }
         public int TotalCostOfCurrentRental { get => totalCostOfCurrentRental; set => totalCostOfCurrentRental = value; }
         public DateTime RentStartDate { get => rentStartDate; set => rentStartDate = value; }
