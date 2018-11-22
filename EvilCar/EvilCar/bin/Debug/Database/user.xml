@@ -3,15 +3,14 @@
   <adminCollection>
     <admin firstName="System" lastName="Admin" guid="663e75e3-6081-4b83-9851-d052e0b2ceb8" password="cHcxMjM0" userName="SysAdmin">
     </admin>
-    <admin firstName="Steve" lastName="Rogers" guid="b8ad4273-0604-4dd2-8642-c4fa06cc68d2" userName="srogers" />
+    <admin firstName="Stevie" lastName="Rogers" guid="b8ad4273-0604-4dd2-8642-c4fa06cc68d2" userName="srogers" password="cHcxMjM0" />
   </adminCollection>
   <managerCollection>
     <manager firstName="System" lastName="Manager" guid="84b47e6c-4c99-4969-b13b-3063af8de9cf" password="cHc0MzIx" userName="SysManager">
     </manager>
-    <manager firstName="Ally" lastName="Angel" guid="fa3cd9d4-1e5c-47f6-b7b0-77aec46adc57" userName="aangel" />
   </managerCollection>
   <customerCollection>
-    <customer firstName="System" lastName="Customer" guid="9D3054C9-70A2-4059-AC8E-FDF1D303D349">
+    <customer firstName="System" lastName="Customer" guid="9D3054C9-70A2-4059-AC8E-FDF1D303D349" userName="scustomer">
     </customer>
   </customerCollection>
 </userDB>

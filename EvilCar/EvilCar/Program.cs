@@ -11,14 +11,16 @@ namespace EvilCar
     {
         static void Main(string[] args)
         {
-            AdminManager manager = new AdminManager();
+            //AdminManager manager = new AdminManager();
+
+            FleetManagerManager manager = new FleetManagerManager();
 
             Byte[] bytes = new Byte[16];
             Guid emptyGuid = new Guid(bytes);
 
-            manager.CreateNewAdmin();
+            //manager.CreateNewAdmin();
 
-            //manager.updateOwnProfile(emptyGuid);
+            manager.CreateNewCustomer();
 
             Console.Read();
         }

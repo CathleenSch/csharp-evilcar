@@ -29,7 +29,14 @@ namespace EvilCar.BL {
 
         private void dbLookup (string username, string password) {
             XmlManager lookup = new XmlManager("Database/user.xml");
-            EvilCarUser user = lookup.getUserInformation();
+            try
+            {
+                EvilCarUser user = lookup.getUserInformation("admin", username);
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
         }
 
         private string decodePassword (string password) {

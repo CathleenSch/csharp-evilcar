@@ -24,12 +24,23 @@ namespace EvilCar.BL
         {
             EvilCarUser user = new EvilCarUser();
 
-            user.FirstName = findInformation(type, "userName", searchInput, "firstName").ToString();
-            user.LastName = findInformation(type, "userName", searchInput, "lastName").ToString();
-            user.Password = findInformation(type, "userName", searchInput, "password").ToString();
-            user.UserID = new Guid(findInformation(type, "userName", searchInput, "guid"));
-            user.UserName = searchInput;
+            try
+            {
+                user.FirstName = findInformation(type, "userName", searchInput, "firstName").ToString();
+                user.LastName = findInformation(type, "userName", searchInput, "lastName").ToString();
+                user.UserID = new Guid(findInformation(type, "userName", searchInput, "guid"));
+                user.UserName = searchInput;
 
+                //Customers can't auth against system => no need for a password
+                if (type != "customer")
+                {
+                    user.Password = findInformation(type, "userName", searchInput, "password").ToString();
+                }
+            } catch (Exception ex)
+            {
+                throw new System.NullReferenceException("User Not Found");
+            }
+            
             return user;
         }
 
