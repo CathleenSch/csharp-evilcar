@@ -26,7 +26,7 @@ namespace EvilCar.DL
 
         public Status CarStatus { get => statusCar; set => statusCar = value; }
         public int PricePerHour { get => pricePerHour; set => pricePerHour = value; }
-        public TypeOfCar CarType { get => typeCar}
+        public TypeOfCar CarType { get => typeCar; }
 
     }
 }

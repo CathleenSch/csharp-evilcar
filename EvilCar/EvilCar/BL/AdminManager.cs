@@ -67,7 +67,7 @@ namespace EvilCar.BL
         public void updateOwnProfile(Guid id)
         {
             Console.WriteLine("You choose to update your own profile.");
-            changeUserInfo(id, "admin");
+            changeUserInfo("admin", id);
         }
         #endregion
 

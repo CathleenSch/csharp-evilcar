@@ -19,16 +19,21 @@ namespace EvilCar.BL
             this.location = location;
         }
 
-        //find information based on nodePath
-        public string fetchInformation(string nodePath, string attribute)
+        //find a user based on their userName
+        public EvilCarUser getUserInformation(string type, string searchInput)
         {
-            XmlNode node = doc.DocumentElement.SelectSingleNode(nodePath);
-            string attr = node.Attributes[attribute]?.InnerText;
-            return attr;
+            EvilCarUser user = new EvilCarUser();
+
+            user.FirstName = findInformation(type, "userName", searchInput, "firstName").ToString();
+            user.LastName = findInformation(type, "userName", searchInput, "lastName").ToString();
+            user.UserID = new Guid(findInformation(type, "userName", searchInput, "guid"));
+            user.UserName = searchInput;
+
+            return user;
         }
 
         //find an attribute value based on the element name and the knowledge of another attribute value, e.g. userName
-        public string findInformation(string elementName, string givenAttribute, string searchValue, string searchAttributeValue)
+        private string findInformation(string elementName, string givenAttribute, string searchValue, string searchAttributeValue)
         {
             XmlNode node = findNodeBasedOnAttributeValue(elementName, givenAttribute, searchValue);
             string attr = node.Attributes[searchAttributeValue]?.InnerText;

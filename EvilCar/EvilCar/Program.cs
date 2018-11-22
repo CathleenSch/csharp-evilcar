@@ -13,7 +13,10 @@ namespace EvilCar
         {
             AdminManager manager = new AdminManager();
 
-            manager.CreateNewFleetManager();
+            Byte[] bytes = new Byte[16];
+            Guid emptyGuid = new Guid(bytes);
+
+            manager.updateOwnProfile(emptyGuid);
 
             Console.Read();
         }

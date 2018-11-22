@@ -48,7 +48,7 @@ namespace EvilCar.BL
 
             try
             {
-                EvilCarUser user = getUserInformation(type, searchInput);
+                EvilCarUser user = xmlManager.getUserInformation(type, searchInput);
                 Console.WriteLine("Entry: First Name: {0}. Last Name: {1}. User Type: {2}.", user.FirstName, user.LastName, type);
             }
             catch (Exception ex)
@@ -58,11 +58,21 @@ namespace EvilCar.BL
         }
 
         //Access User in DB file via their id and change their information
-        protected void changeUserInfo(string type)
+        protected void changeUserInfo(string type, Guid id)
         {
             char selection;
+            Guid userId = id;
             string newValue = "";
             string changeParam = "";
+
+            if(id == Guid.Empty)
+            {
+                string userName;
+                Console.WriteLine("Enter the username for the user whose information needs changing.");
+                userName = Console.ReadLine();
+                EvilCarUser user = xmlManager.getUserInformation(type, userName);
+                userId = user.UserID;
+            } 
 
             Console.WriteLine("What info needs changining?\n 1.First Name 2.Last Name 3.User Name 4.Password");
             selection = Console.ReadKey().KeyChar;
@@ -88,21 +98,8 @@ namespace EvilCar.BL
             }
 
             //Change entry in XML file use id to find user and param to change correct info
-            xmlManager.changeInformationBasedOnGuid(type, id.ToString().ToUpper(), changeParam, newValue);
+            xmlManager.changeInformationBasedOnGuid(type, userId.ToString().ToUpper(), changeParam, newValue);
             Console.WriteLine("Value changed.");
-        }
-
-        //find a user based on their userName
-        private EvilCarUser getUserInformation(string type, string searchInput)
-        {
-            EvilCarUser user = new EvilCarUser();
-
-            user.FirstName = xmlManager.findInformation(type, "userName", searchInput, "firstName").ToString();
-            user.LastName = xmlManager.findInformation(type, "userName", searchInput, "lastName").ToString();
-            user.UserID = new Guid(xmlManager.findInformation(type, "userName", searchInput, "guid"));
-            user.UserName = searchInput;
-
-            return user;
         }
 
         #endregion

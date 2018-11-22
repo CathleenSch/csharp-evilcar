@@ -6,3 +6,5 @@ C:\Users\aschaefer\Documents\GitHub\csharp-evilcar\EvilCar\EvilCar\obj\Debug\Evi
 C:\Users\aschaefer\Documents\GitHub\csharp-evilcar\EvilCar\EvilCar\obj\Debug\EvilCar.pdb
 C:\Users\aschaefer\Documents\GitHub\csharp-evilcar\EvilCar\EvilCar\bin\Debug\Database\user.xml
 C:\Users\aschaefer\Documents\GitHub\csharp-evilcar\EvilCar\EvilCar\obj\Debug\EvilCar.csprojAssemblyReference.cache
+C:\Users\aschaefer\Documents\GitHub\csharp-evilcar\EvilCar\EvilCar\bin\Debug\Database\cars.xml
+C:\Users\aschaefer\Documents\GitHub\csharp-evilcar\EvilCar\EvilCar\bin\Debug\Database\fleet.xml

@@ -41,8 +41,12 @@ namespace EvilCar.BL
 
         public void UpdateCustomerProfile()
         {
+            //empty guid to trigger user selection in UserManager.changeUserInfo
+            Byte[] bytes = new Byte[16];
+            Guid emptyGuid = new Guid(bytes);
+
             Console.WriteLine("You choose to update a customer profile.");
-            changeUserInfo(id, "customer");
+            changeUserInfo("customer", emptyGuid);
         }
 
         public void CalculateCustomerFeeTotal()
@@ -59,7 +63,7 @@ namespace EvilCar.BL
         public void updateOwnProfile(Guid id)
         {
             Console.WriteLine("You choose to update your own profile.");
-            changeUserInfo(id, "manager");
+            changeUserInfo("customer", id);
         }
         #endregion
 
