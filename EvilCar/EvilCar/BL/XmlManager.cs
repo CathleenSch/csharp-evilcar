@@ -51,14 +51,18 @@ namespace EvilCar.BL
             XmlNode collection; 
 
             //differ between Admin and Manager
-            if (user.Type == "ADMIN")
+            if (user.Type == EvilCarUser.UserType.ADMIN)
             {
                 type = "admin";
                 nodeCollection = "userDB/adminCollection";
-            } else
+            } else if (user.Type == EvilCarUser.UserType.FLEET_MANAGER)
             {
                 type = "manager";
                 nodeCollection = "userDB/managerCollection";
+            } else
+            {
+                type = "customer";
+                nodeCollection = "userDB/customerCollection";
             }
 
             collection = doc.SelectSingleNode(nodeCollection);

@@ -25,21 +25,26 @@ namespace EvilCar.DL
         }
 
         //offical constructor where type of user must be entered
-        public EvilCarUser(string firstName, string lastName, string userName, UserType type)
+        /*public EvilCarUser(string firstName, string lastName, string userName, UserType type)
         {
             this.firstName = firstName;
             this.lastName = lastName;
             this.userName = userName;
             userType = type;
             userID = Guid.NewGuid();
+        }*/
+
+        public EvilCarUser()
+        {
+
         }
 
         //Getter and Setter
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
         public string UserName { get => userName; set => userName = value; }
-        public Guid UserID { get => userID; }
-        public string Type { get => userType.ToString(); }
+        public Guid UserID { get => userID; set => userID = value;}
+        public UserType Type { get => userType; set => userType = value; }
 
     }
 }
