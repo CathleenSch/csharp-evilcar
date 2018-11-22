@@ -16,8 +16,8 @@ namespace EvilCar.BL
             this.xmlManager = new XmlManager(xmlPath);
         }
 
-        #region HelperFunctions
-        //Some private Helper Functions
+        #region User Management
+        //Some Helper Functions
         //to handle business logic and communication with xml manager
         protected void newUser(EvilCarUser.UserType type)
         {
@@ -29,6 +29,9 @@ namespace EvilCar.BL
             newUser.LastName = Console.ReadLine();
             Console.WriteLine("Enter their user Name.");
             newUser.UserName = Console.ReadLine();
+
+            newUser.Type = type;
+            newUser.UserID = Guid.NewGuid();
 
             xmlManager.newUserNode(newUser);
 
@@ -98,7 +101,7 @@ namespace EvilCar.BL
             }
 
             //Change entry in XML file use id to find user and param to change correct info
-            xmlManager.changeInformationBasedOnGuid(type, userId.ToString().ToUpper(), changeParam, newValue);
+            xmlManager.changeInformationBasedOnGuid(type, userId.ToString(), changeParam, newValue);
             Console.WriteLine("Value changed.");
         }
 

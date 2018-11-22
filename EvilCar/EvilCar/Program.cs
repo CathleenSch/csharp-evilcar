@@ -16,7 +16,9 @@ namespace EvilCar
             Byte[] bytes = new Byte[16];
             Guid emptyGuid = new Guid(bytes);
 
-            manager.updateOwnProfile(emptyGuid);
+            manager.CreateNewAdmin();
+
+            //manager.updateOwnProfile(emptyGuid);
 
             Console.Read();
         }

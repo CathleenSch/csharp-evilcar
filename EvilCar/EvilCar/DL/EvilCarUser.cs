@@ -13,6 +13,7 @@ namespace EvilCar.DL
         protected string firstName;
         protected string lastName;
         protected string userName;
+        protected string userPassword;
         protected Guid userID;
         protected UserType userType;
 
@@ -42,6 +43,7 @@ namespace EvilCar.DL
         //Getter and Setter
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
+        public string Password { get => userPassword; set => userPassword = value; }
         public string UserName { get => userName; set => userName = value; }
         public Guid UserID { get => userID; set => userID = value;}
         public UserType Type { get => userType; set => userType = value; }

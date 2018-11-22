@@ -26,18 +26,11 @@ namespace EvilCar.BL
 
             user.FirstName = findInformation(type, "userName", searchInput, "firstName").ToString();
             user.LastName = findInformation(type, "userName", searchInput, "lastName").ToString();
+            user.Password = findInformation(type, "userName", searchInput, "password").ToString();
             user.UserID = new Guid(findInformation(type, "userName", searchInput, "guid"));
             user.UserName = searchInput;
 
             return user;
-        }
-
-        //find an attribute value based on the element name and the knowledge of another attribute value, e.g. userName
-        private string findInformation(string elementName, string givenAttribute, string searchValue, string searchAttributeValue)
-        {
-            XmlNode node = findNodeBasedOnAttributeValue(elementName, givenAttribute, searchValue);
-            string attr = node.Attributes[searchAttributeValue]?.InnerText;
-            return attr;
         }
 
         //change the value of an already existing node attribute
@@ -82,17 +75,21 @@ namespace EvilCar.BL
             xc.Value = user.UserID.ToString();
             XmlAttribute xd = doc.CreateAttribute("userName");
             xd.Value = user.UserName;
+            XmlAttribute xe = doc.CreateAttribute("password");
+            xe.Value = "StartPassword";
 
             newNode.Attributes.Append(xa);
             newNode.Attributes.Append(xb);
             newNode.Attributes.Append(xc);
             newNode.Attributes.Append(xd);
+            newNode.Attributes.Append(xe);
 
             collection.AppendChild(newNode);
 
             doc.Save(location);
         }
 
+        #region HelperFunctions
         //Helper Function to find a node based on a specific attribute value
         private XmlNode findNodeBasedOnAttributeValue(string elementName, string attribute, string searchValue)
         {
@@ -100,5 +97,14 @@ namespace EvilCar.BL
             XmlNodeList xnList = doc.SelectNodes(searchQuery);
             return xnList[0];
         }
+
+        //find an attribute value based on the element name and the knowledge of another attribute value, e.g. userName
+        private string findInformation(string elementName, string givenAttribute, string searchValue, string searchAttributeValue)
+        {
+            XmlNode node = findNodeBasedOnAttributeValue(elementName, givenAttribute, searchValue);
+            string attr = node.Attributes[searchAttributeValue]?.InnerText;
+            return attr;
+        }
+        #endregion
     }
 }
