@@ -1,47 +1,56 @@
 using EvilCar.DL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EvilCar.BL {
     class LoginManager {
-        public void login () {
+
+        private static string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\user.xml");
+        XmlManager manager = new XmlManager(path);
+
+        public EvilCarUser UserLogin()
+        {
+            EvilCarUser user = new EvilCarUser();
             string username;
             string password = null;
 
             Console.Write("Please enter your username: ");
-             username = Console.ReadLine();
+            username = Console.ReadLine();
             Console.Write("Please enter your password: ");
-            while (true) {
+            while (true)
+            {
                 var key = System.Console.ReadKey(true);
                 if (key.Key == ConsoleKey.Enter)
                     break;
                 password += key.KeyChar;
             }
 
+            user = manager.searchUser(username);
 
-
-            Console.WriteLine("Logged in!");
-
-        }
-
-        private void dbLookup (string username, string password) {
-            XmlManager lookup = new XmlManager("Database/user.xml");
-            try
+            if(decodePassword(user.Password) == password)
             {
-                EvilCarUser user = lookup.getUserInformation("admin", username);
-            } catch(Exception ex)
+                Console.WriteLine("Logged in!");
+                return user;
+            } else
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Invalid LogIn. Please try again.");
+                return null;
             }
-           
         }
 
-        private string decodePassword (string password) {
-            var bytes = System.Convert.FromBase64String(password);
+        protected string decodePassword (string base64EncodedData) {
+            var bytes = System.Convert.FromBase64String(base64EncodedData);
             return System.Text.Encoding.UTF8.GetString(bytes);
+        }
+
+        public string encodePassword (string plainText) {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
         }
     }
 }

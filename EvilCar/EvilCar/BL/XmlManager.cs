@@ -39,11 +39,41 @@ namespace EvilCar.BL
                 }
             } catch (Exception ex)
             {
-                throw new System.NullReferenceException("User Not Found");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Unable to find this user");
             }
             
             return user;
         }
+
+        public EvilCarUser searchUser(string username)
+        {
+            EvilCarUser user;
+            user = getUserInformation("admin", username);
+            if(user.UserID == Guid.Empty)
+            {
+                user = getUserInformation("manager", username);
+                if (user.UserID == Guid.Empty)
+                {
+                    user = getUserInformation("customer", username);
+                    if (user.UserID == Guid.Empty)
+                    {
+                        throw new System.NullReferenceException("User does not exist in system.");
+                    } else
+                    {
+                        user.Type = EvilCarUser.UserType.CUSTOMER;
+                    }
+                } else
+                {
+                    user.Type = EvilCarUser.UserType.FLEET_MANAGER;
+                }
+            } else
+            {
+                user.Type = EvilCarUser.UserType.ADMIN;
+            }
+
+            return user;
+        } 
 
         //create a new user node
         public void newUserNode(EvilCarUser user)
@@ -82,7 +112,7 @@ namespace EvilCar.BL
             XmlAttribute xd = doc.CreateAttribute("userName");
             xd.Value = user.UserName;
             XmlAttribute xe = doc.CreateAttribute("password");
-            xe.Value = "StartPassword";
+            xe.Value = user.Password;
 
             newNode.Attributes.Append(xa);
             newNode.Attributes.Append(xb);
@@ -269,8 +299,14 @@ namespace EvilCar.BL
         private string findInformation(string elementName, string givenAttribute, string searchValue, string searchAttributeValue)
         {
             XmlNode node = findNodeBasedOnAttributeValue(elementName, givenAttribute, searchValue);
-            string attr = node.Attributes[searchAttributeValue]?.InnerText;
-            return attr;
+            if (node == null)
+            {
+                throw new System.NullReferenceException("Unable to find any entry related to your input.");
+            } else
+            {
+                string attr = node.Attributes[searchAttributeValue]?.InnerText;
+                return attr;
+            }
         }
         #endregion
     }

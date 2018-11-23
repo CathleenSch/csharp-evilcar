@@ -12,12 +12,18 @@ namespace EvilCar
     {
         static void Main(string[] args)
         {
-            EvilCarUser CurrentUser = new EvilCarUser();
+            EvilCarUser CurrentUser = null;
+            LoginManager loginManager = new LoginManager();
+
             Console.Write("Welcome to the evil car management portal. Please login to continue.");
-            Console.Write("Username: ");
-            Console.WriteLine("Password");
-            CurrentUser.Type = EvilCarUser.UserType.ADMIN;
-            CurrentUser.UserID = new Guid("84b47e6c-4c99-4969-b13b-3063af8de9cf");
+
+            while(CurrentUser == null)
+            {
+                CurrentUser = loginManager.UserLogin();
+            }
+
+            //CurrentUser.Type = EvilCarUser.UserType.ADMIN;
+            //CurrentUser.UserID = new Guid("84b47e6c-4c99-4969-b13b-3063af8de9cf");
 
             if(CurrentUser.Type == EvilCarUser.UserType.ADMIN)
             {

@@ -10,6 +10,7 @@ namespace EvilCar.BL
     class UserManager
     {
         XmlManager xmlManager;
+        LoginManager loginManager;
 
         public UserManager(string xmlPath)
         {
@@ -35,6 +36,7 @@ namespace EvilCar.BL
 
             newUser.Type = type;
             newUser.UserID = Guid.NewGuid();
+            newUser.Password = loginManager.encodePassword("StartPassword");
 
             xmlManager.newUserNode(newUser);
 

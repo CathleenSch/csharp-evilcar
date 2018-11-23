@@ -4,6 +4,7 @@
     <admin firstName="System" lastName="Admin" guid="663e75e3-6081-4b83-9851-d052e0b2ceb8" password="cHcxMjM0" userName="SysAdmin">
     </admin>
     <admin firstName="Clint" lastName="Barton" guid="f24ed7f3-ea7e-47e3-80e0-94166b350cf7" userName="cbarton" password="StartPassword" />
+    <admin firstName="Steve" lastName="Rogers" guid="3cd4233f-11f4-434e-9f90-15271fadcbee" userName="SRogers" password="StartPassword" />
   </adminCollection>
   <managerCollection>
     <manager firstName="System" lastName="Manager" guid="84b47e6c-4c99-4969-b13b-3063af8de9cf" password="cHc0MzIx" userName="SysManager">
