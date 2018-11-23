@@ -12,11 +12,13 @@ namespace EvilCar.BL
     class AdminManager : UserManager
     {
         private static string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) , @"Database\user.xml");
+        private static string fleetXmlPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\fleet.xml");
+        FleetManager fleetManager;
 
         //Constructor
         public AdminManager() : base(path)
-        {            
-
+        {
+            fleetManager = new FleetManager(fleetXmlPath);
         }
 
         #region administrateAdmins
@@ -34,7 +36,11 @@ namespace EvilCar.BL
         public void ReadAdminInfos()
         {
             Console.WriteLine("You are requesting info about another Admin.");
-            fetchUserInfo("admin");
+            string searchInput;
+            Console.WriteLine("Enter an userName to get their details.");
+            searchInput = Console.ReadLine();
+            Console.WriteLine("You requested info on {0}", searchInput);
+            fetchUserInfo("admin", searchInput);
         }
 
         #endregion
@@ -49,13 +55,42 @@ namespace EvilCar.BL
         public void CreateNewFleetManager()
         {
             Console.WriteLine("You are creating a new Fleet Manager.");
-            newUser(EvilCarUser.UserType.FLEET_MANAGER);
+            EvilCarUser manager = newUser(EvilCarUser.UserType.FLEET_MANAGER);
+            fleetManager.assignFleetManager(manager.UserID);
         }
 
         public void readFleetManagerInfo()
         {
             Console.WriteLine("You are requesting info about a Fleet Manager.");
-            fetchUserInfo("manager");
+            string searchInput;
+            Console.WriteLine("Enter an userName to get their details.");
+            searchInput = Console.ReadLine();
+            Console.WriteLine("You requested info on {0}", searchInput);
+            fetchUserInfo("manager", searchInput);
+        }
+
+        public void deleteFleetManager()
+        {
+            Console.WriteLine("You are abbout to premanently delete a fleet manager.");
+            Console.WriteLine("Please enter the userName of the manager.");
+            string userName = Console.ReadLine();
+
+            EvilCarUser user = fetchUserInfo("manager", userName);
+
+            if(user != null)
+            {
+                try
+                {
+                    fleetManager.removeNode("manager", "guid", user.UserID.ToString());
+                    deleteUser("manager", user.UserName);
+                } catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return;
+                }
+                
+                Console.WriteLine("Successfully deleted {0} {1}", user.FirstName, user.LastName);
+            }            
         }
         #endregion
 
@@ -80,9 +115,13 @@ namespace EvilCar.BL
         {
             string name;
 
+
             Console.WriteLine("You choose to add a new branch.\n Please enter a name for the new branch.");
             name = Console.ReadLine();
-            Branch newBranch = new Branch(name);
+            Branch newBranch = new Branch();
+            newBranch.Name = name;
+            newBranch.BranchId = Guid.NewGuid();
+            fleetManager.addNewBranch(newBranch);
         }
         #endregion
 

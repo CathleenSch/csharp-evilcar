@@ -9,11 +9,10 @@ namespace EvilCar.DL
     class Branch
     {
         protected string branchName;
-        protected Guid[] branchManager = new Guid[5];
+        protected Guid branchID;
 
-        public Branch(string name)
-        {
-            branchName = name;
-        }
+        public string Name { get => branchName; set => branchName = value; }
+        public Guid BranchId { get => branchID; set => branchID = value; }
+
     }
 }

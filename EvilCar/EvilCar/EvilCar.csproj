@@ -43,7 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\AdminManager.cs" />
+    <Compile Include="BL\AdminUserMenu.cs" />
+    <Compile Include="BL\FleetManager.cs" />
     <Compile Include="BL\FleetManagerManager.cs" />
+    <Compile Include="BL\ManagerUserMenu.cs" />
     <Compile Include="BL\UserManager.cs" />
     <Compile Include="BL\LoginManager.cs" />
     <Compile Include="BL\XmlManager.cs" />
@@ -60,9 +63,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\cars.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Database\fleet.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

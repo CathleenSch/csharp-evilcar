@@ -9,15 +9,19 @@ using System.Threading.Tasks;
 
 namespace EvilCar.BL
 {
-    class FleetManagerManager : UserManager
+    class FleetManagerManager
     {
-        private static string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\user.xml");
+        private static string pathUserXml = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\user.xml");
+        private static string pathFleetXml = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\fleet.xml");
+        FleetManager fleetManager;
+        UserManager userManager;
 
         //Constructor
-        public FleetManagerManager() : base(path)
+        //Initiate instance of all required managers
+        public FleetManagerManager()
         {
-
-
+            fleetManager = new FleetManager(pathFleetXml);
+            userManager = new UserManager(pathUserXml);
         }
 
         #region administerCustomers
@@ -30,13 +34,17 @@ namespace EvilCar.BL
         public void CreateNewCustomer()
         {
             Console.WriteLine("You are creating a new Customer Profile.");
-            newUser(EvilCarUser.UserType.CUSTOMER);
+            userManager.newUser(EvilCarUser.UserType.CUSTOMER);
         }
 
         public void ReadCustomerInfo()
         {
             Console.WriteLine("You are requesting info about a customer.");
-            fetchUserInfo("customer");
+            string searchInput;
+            Console.WriteLine("Enter an userName to get their details.");
+            searchInput = Console.ReadLine();
+            Console.WriteLine("You requested info on {0}", searchInput);
+            userManager.fetchUserInfo("customer", searchInput);
         }
 
         public void UpdateCustomerProfile()
@@ -46,7 +54,7 @@ namespace EvilCar.BL
             Guid emptyGuid = new Guid(bytes);
 
             Console.WriteLine("You choose to update a customer profile.");
-            changeUserInfo("customer", emptyGuid);
+            userManager.changeUserInfo("customer", emptyGuid);
         }
 
         public void CalculateCustomerFeeTotal()
@@ -63,19 +71,28 @@ namespace EvilCar.BL
         public void updateOwnProfile(Guid id)
         {
             Console.WriteLine("You choose to update your own profile.");
-            changeUserInfo("customer", id);
+            userManager.changeUserInfo("customer", id);
         }
         #endregion
 
         #region administerFleet
-        public void addCar()
+        /* 
+         * Region to Administer Own Fleet
+         * - AddCarToFleet
+         * - UpdateFleet
+         * - RemoveCarFromFleet
+         */
+        public void AddNewCar(Guid branchGuid)
         {
-
+            Console.WriteLine("You choose to add a new car to your fleet.");
+            fleetManager.addCarToFleet(branchGuid);
+            
         }
 
-        public void updateFleet()
+        public void getFleetOverview(Guid branchGuid)
         {
-
+            Console.WriteLine("You choose to get information about the fleet you are managing.");
+            fleetManager.getFleetOverview(branchGuid);
         }
         #endregion
     }

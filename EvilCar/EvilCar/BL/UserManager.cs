@@ -17,9 +17,12 @@ namespace EvilCar.BL
         }
 
         #region User Management
-        //Some Helper Functions
-        //to handle business logic and communication with xml manager
-        protected void newUser(EvilCarUser.UserType type)
+        /*User Management Functions
+         * Handle input and communication with user
+         * interface between user communication and xml "database" conversion
+        */
+        //Create new user based on userType passed as parameter
+        public EvilCarUser newUser(EvilCarUser.UserType type)
         {
             EvilCarUser newUser = new EvilCarUser();
 
@@ -36,32 +39,35 @@ namespace EvilCar.BL
             xmlManager.newUserNode(newUser);
 
             Console.WriteLine("Succesfully created a new {0} User: {1}, {2} ({3})", type, newUser.LastName, newUser.FirstName, newUser.UserName);
+            return newUser;
         }
 
         //Fetch information about a user, using their username
         //using the XMLManager to access the userDB xml file
-        //handles spelling errors
-        protected void fetchUserInfo(string type)
+        //handles spelling errors and invalid search requests
+        public EvilCarUser fetchUserInfo(string type, string searchInput)
         {
-            string searchInput;
+            EvilCarUser user;
 
-            Console.WriteLine("Enter an userName to get their details.");
-            searchInput = Console.ReadLine();
-            Console.WriteLine("You requested info on {0}", searchInput);
-
+            //try to get user info based on entered searchValue (username) 
             try
             {
-                EvilCarUser user = xmlManager.getUserInformation(type, searchInput);
+                user = xmlManager.getUserInformation(type, searchInput);
                 Console.WriteLine("Entry: First Name: {0}. Last Name: {1}. User Type: {2}.", user.FirstName, user.LastName, type);
+                return user;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Something went wrong. Please check your spelling.");
+                return null;
             }
         }
 
         //Access User in DB file via their id and change their information
-        protected void changeUserInfo(string type, Guid id)
+        //in case of empty id a username is required to find the user
+        //userType is passed as parameter to ensure a user can't find users of types they're not supposed to view
+        public void changeUserInfo(string type, Guid id)
         {
             char selection;
             Guid userId = id;
@@ -103,6 +109,22 @@ namespace EvilCar.BL
             //Change entry in XML file use id to find user and param to change correct info
             xmlManager.changeInformationBasedOnGuid(type, userId.ToString(), changeParam, newValue);
             Console.WriteLine("Value changed.");
+        }
+
+        public EvilCarUser deleteUser(string type, string userName)
+        {
+            try
+            {
+                EvilCarUser user = xmlManager.getUserInformation(type, userName);
+                xmlManager.removeNode(type, "guid", user.UserID.ToString());
+                return user;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Something went wrong. Please check your spelling.");
+                return null;
+            }
         }
 
         #endregion

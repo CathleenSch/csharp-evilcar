@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<fleet>
-  <to>Tove</to>
-  <from>Jani</from>
-  <heading>Reminder</heading>
-  <body>Don't forget me this weekend!</body>
-</fleet>
+<fleetDB>
+  <branches>
+    <branch name="GermanyStuttgart" guid="56294f7d-d329-4ef2-879c-41af678953af">
+      <manager managerGuid="84b47e6c-4c99-4969-b13b-3063af8de9cf"></manager>
+    </branch>
+  </branches>
+  <carDB>
+    <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="CITY" price="20" status="FREE" guid="82aed5b5-3d33-4647-a5e1-1f172a540218"></car>
+    <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="LIMOUSINE" price="100" status="FREE" guid="be9fbbb-377a-48ed-b980-d54dadd9604d"></car>
+    <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="CITY" price="30" status="BOOKED" guid="10a0ba9f-93ee-42cf-b2d1-32f984d5b0fc"></car>
+  </carDB>
+</fleetDB>

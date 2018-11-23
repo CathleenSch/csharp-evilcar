@@ -11,10 +11,14 @@ namespace EvilCar.DL
         protected string fleetName;
         protected Guid fleetID;
 
-        public Fleet(string name)
+        public void NewFleet(string name)
         {
             fleetName = name;
             fleetID = Guid.NewGuid();
         }
+
+        public string Name { get => fleetName; set => fleetName = value; }
+        public Guid FleetId { get => fleetID; set => fleetID = value; }
+
     }
 }
