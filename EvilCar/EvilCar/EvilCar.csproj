@@ -47,6 +47,7 @@
     <Compile Include="BL\FleetManager.cs" />
     <Compile Include="BL\FleetManagerManager.cs" />
     <Compile Include="BL\ManagerUserMenu.cs" />
+    <Compile Include="BL\Services.cs" />
     <Compile Include="BL\UserManager.cs" />
     <Compile Include="BL\LoginManager.cs" />
     <Compile Include="BL\XmlManager.cs" />
