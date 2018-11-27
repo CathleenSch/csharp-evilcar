@@ -14,7 +14,7 @@ namespace EvilCar.BL {
 
             for (int i = 1; i < firstName.Length; i++) {
                 try {
-                    xml.searchUser(username);
+                    xml.searchSystemUser(username);
                 } catch (Exception e) {
                     break;
                 }
@@ -29,7 +29,7 @@ namespace EvilCar.BL {
             while (true) {
                 username = firstName + lastName + count;
                 try {
-                    xml.searchUser(username);
+                    xml.searchSystemUser(username);
                 } catch (Exception e) {
                     break;
                 }

@@ -90,16 +90,63 @@ namespace EvilCar.BL
         }
 
         #region Cost Estimation
-        public void estimateRentalCost(Guid branchGuid)
+        public void estimateRentalCost(Guid managerGuid)
         {
+            int carSelection;
+            int[] serviceSelection = new int[4];
+            int totalCost;
+            List<Service> availableServices;
+
             Console.WriteLine("Select the car your customer wants to rent.");
-            Fleet fleet = xmlManager.getFleetInformation(branchGuid);
+            Fleet fleet = xmlManager.getFleetInformation(managerGuid);
             List<Car> cars = xmlManager.getCarInformation(fleet.FleetId);
+            for (int i=0;i<cars.Count;i++)
+            {
+                Console.WriteLine("{0}. Status: {1} \t Type: {2} \t Price: {3}", i, cars[i].CarStatus, cars[i].CarType, cars[i].PricePerHour);
+            }
+            Console.WriteLine("Select the number of the car to be rented.");
+            carSelection = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("How long will the car be needed (in hours)?");
             int rentDuration = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Which services are required? Seperate by comma\n" +
-                                "1.Spotify 2.Parker 3.Navigation 4.Massage");
-            
+            Console.WriteLine("Which services are required? Seperate by comma!\n");
+            availableServices = xmlManager.availableServices();
+            for (int i = 0; i < availableServices.Count; i++)
+            {
+                Console.Write("{0}. {1} ({2} per booking) \t", i, availableServices[i].Name, availableServices[i].Pricing);
+            }
+            Console.WriteLine("\n");
+            string s1 = Console.ReadLine();
+            try
+            {
+                int[] selectionArray = s1.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                for(int i=0;i< selectionArray.Length;i++)
+                {
+                    serviceSelection[selectionArray[i]] = 1;
+                }
+            } catch(Exception ex)
+            {
+                Console.WriteLine("Invalid input. Start cost estimation over.");
+                return;
+            }
+            totalCost = CalculateCost(cars[carSelection].PricePerHour, rentDuration, serviceSelection);
+            Console.WriteLine("the estimated total for this rent process will be {0}", totalCost);
+
+        }
+
+        private int CalculateCost(int carFee, int duration, int[] services)
+        {
+            int total = carFee*duration;
+
+            List<Service> availableServices = xmlManager.availableServices();
+            for (int i=0;i<services.Length;i++)
+            {
+                if(services[i] == 1)
+                {
+                    total += availableServices[i].Pricing;
+                }
+            }
+
+            return total;
         }
         #endregion
     }

@@ -176,8 +176,8 @@ namespace EvilCar.BL
 
             try
             {
-                fleet.Name = findInformation("branch", "guid", id.ToString("D"), "name");
-                fleet.FleetId = id;
+                XmlNode manager = findNodeBasedOnAttributeValue("manager", "guid", id.ToString("D"));
+                fleet.FleetId = Guid.Parse(manager.ParentNode.Attributes["guid"]?.InnerText);
             }
             catch (Exception ex)
             {
@@ -237,12 +237,12 @@ namespace EvilCar.BL
 
         public void newManagerNode(Guid managerId, string branchName)
         {
-            XmlNode branch = findNodeBasedOnAttributeValue("branch", "name", branchName);
+            XmlNode branch = findNodeBasedOnAttributeValue("fleet", "name", branchName);
             if(branch == null)
             {
 
-                Console.WriteLine("Unable to find this brach.");
-                throw new System.NullReferenceException("Branch Not Found");
+                Console.WriteLine("Unable to find this fleet.");
+                throw new System.NullReferenceException("Fleet Not Found");
             }
 
             //Set attributes from user object
@@ -255,6 +255,22 @@ namespace EvilCar.BL
             branch.AppendChild(newNode);
 
             doc.Save(location);
+        }
+
+        public List<Service> availableServices()
+        {
+            List<Service> services = new List<Service>();
+            XmlNodeList serviceList = doc.SelectNodes("//service");
+            foreach (XmlNode s in serviceList)
+            {
+                // Add services to list
+                services.Add(new Service()
+                {
+                    Name = s.Attributes["name"].Value,
+                    Pricing = Convert.ToInt32(s.Attributes["price"].Value)
+                });
+            }
+            return services;
         }
 
         #endregion

@@ -23,7 +23,7 @@ namespace EvilCar.BL
             userSelection = Console.ReadKey().KeyChar;
             if (userSelection == '1')
             {
-                Console.WriteLine("\n 1.New Customer 2.Info about a Admin 3. Update Customer 4.Back to Main Menu");
+                Console.WriteLine("\n 1.New Customer 2.Info about a Admin 3.Update Customer 4.Estimate rental cost 5.Back to Main Menu");
                 userSelection = Console.ReadKey().KeyChar;
                 Console.WriteLine("\n");
                 //NewAdmin or AdminInfo
@@ -38,6 +38,10 @@ namespace EvilCar.BL
                 else if (userSelection == '3')
                 {
                     manager.UpdateCustomerProfile();
+                }
+                else if (userSelection == '4')
+                {
+                    manager.MakeCostEstimation(managerId);
                 }
                 else
                 {
@@ -60,7 +64,7 @@ namespace EvilCar.BL
                 else if (userSelection == '2')
                 {
                     manager.getFleetOverview(managerId);
-                }
+                } 
                 else
                 {
                     Console.WriteLine("Back to Main Menu.");

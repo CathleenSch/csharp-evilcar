@@ -57,9 +57,10 @@ namespace EvilCar.BL
             userManager.changeUserInfo("customer", emptyGuid);
         }
 
-        public void CalculateCustomerFeeTotal()
+        public void MakeCostEstimation(Guid managerGuid)
         {
-
+            Console.WriteLine("You choose to make a cost estimation for a potential costumer.");
+            fleetManager.estimateRentalCost(managerGuid);
         }
         #endregion
 
@@ -82,17 +83,17 @@ namespace EvilCar.BL
          * - UpdateFleet
          * - RemoveCarFromFleet
          */
-        public void AddNewCar(Guid branchGuid)
+        public void AddNewCar(Guid managerGuid)
         {
             Console.WriteLine("You choose to add a new car to your fleet.");
-            fleetManager.addCarToFleet(branchGuid);
+            fleetManager.addCarToFleet(managerGuid);
             
         }
 
-        public void getFleetOverview(Guid branchGuid)
+        public void getFleetOverview(Guid managerGuid)
         {
             Console.WriteLine("You choose to get information about the fleet you are managing.");
-            fleetManager.getFleetOverview(branchGuid);
+            fleetManager.getFleetOverview(managerGuid);
         }
         #endregion
     }
