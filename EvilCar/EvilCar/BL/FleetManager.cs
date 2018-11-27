@@ -51,6 +51,8 @@ namespace EvilCar.BL
 
             Console.WriteLine("\n What is the hourly fee for this car?");
             newCar.PricePerHour = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\n Enter a brief description");
+            newCar.CarDescription = Console.ReadLine();
             newCar.CarStatus = Car.Status.FREE;
 
             newCar.CreateNewCar(newCar.PricePerHour, newCar.CarType, branchGuid);
@@ -86,5 +88,19 @@ namespace EvilCar.BL
             xmlManager.newManagerNode(managerId, searchInput);
             Console.WriteLine("Successfully assigned this manager");
         }
+
+        #region Cost Estimation
+        public void estimateRentalCost(Guid branchGuid)
+        {
+            Console.WriteLine("Select the car your customer wants to rent.");
+            Fleet fleet = xmlManager.getFleetInformation(branchGuid);
+            List<Car> cars = xmlManager.getCarInformation(fleet.FleetId);
+            Console.WriteLine("How long will the car be needed (in hours)?");
+            int rentDuration = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Which services are required? Seperate by comma\n" +
+                                "1.Spotify 2.Parker 3.Navigation 4.Massage");
+            
+        }
+        #endregion
     }
 }

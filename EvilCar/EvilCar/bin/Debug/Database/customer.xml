@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<customerCollection>
+  <customer firstName="System" lastName="Customer" guid="9d3054c9-70a2-4059-ac8e-fdf1d303d349">
+  </customer>
+  <customer firstName="Nat" lastName="Romanova" guid="436991b8-36c4-4ac1-8cfb-629406b9d9a4" userName="nroma" />
+  <customer firstName="Maria" lastName="Hill" guid="d95b9e2b-64e2-40bc-9304-ae400244efcf" userName="mhill" />
+</customerCollection>

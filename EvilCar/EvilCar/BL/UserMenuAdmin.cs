@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvilCar.BL
 {
-    class AdminUserMenu
+    class UserMenuAdminView
     {
         public void Start()
         {
@@ -19,8 +19,9 @@ namespace EvilCar.BL
             {
                 Console.WriteLine("\n 1.New Admin 2.Info about a Admin 3. Change own information 4.Back to Main Menu");
                 userSelection = Console.ReadKey().KeyChar;
+                Console.WriteLine("\n");
                 //NewAdmin or AdminInfo
-                if(userSelection == '1') {
+                if (userSelection == '1') {
                     manager.CreateNewAdmin();
                 } else if(userSelection == '2')
                 {
@@ -40,6 +41,7 @@ namespace EvilCar.BL
             } else if (userSelection == '2') {
                 Console.WriteLine("\n1.New Manager 2.Info about a Manager 3.Delete Manager");
                 userSelection = Console.ReadKey().KeyChar;
+                Console.WriteLine("\n");
                 //NewFM InfoFM DeleteFM
                 if (userSelection == '1')
                 {
@@ -63,6 +65,7 @@ namespace EvilCar.BL
             {
                 Console.WriteLine("\n 1.New Branch 2.Exit to main menu");
                 userSelection = Console.ReadKey().KeyChar;
+                Console.WriteLine("\n");
                 if (userSelection == '1')
                 {
                     manager.createNewBranch();
@@ -76,7 +79,7 @@ namespace EvilCar.BL
 
             } else if (userSelection == '4')
             {
-                Console.WriteLine("Press any key to exit");
+                Console.WriteLine("\nPress any key to exit");
                 Console.Read();
                 Environment.Exit(0);
             } else

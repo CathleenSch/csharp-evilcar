@@ -11,7 +11,7 @@ namespace EvilCar.BL
 {
     class FleetManagerManager
     {
-        private static string pathUserXml = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\user.xml");
+        private static string pathCustomerXml = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\customer.xml");
         private static string pathFleetXml = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\fleet.xml");
         FleetManager fleetManager;
         UserManager userManager;
@@ -21,7 +21,7 @@ namespace EvilCar.BL
         public FleetManagerManager()
         {
             fleetManager = new FleetManager(pathFleetXml);
-            userManager = new UserManager(pathUserXml);
+            userManager = new UserManager(pathCustomerXml);
         }
 
         #region administerCustomers

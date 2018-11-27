@@ -16,6 +16,7 @@ namespace EvilCar.DL
         private Status statusCar;
         private TypeOfCar typeCar;
         private Guid fleetGuid;
+        private string carName;
 
         public void CreateNewCar(int price, TypeOfCar type, Guid fleetGuid)
         {
@@ -31,6 +32,7 @@ namespace EvilCar.DL
         public TypeOfCar CarType { get => typeCar; set => typeCar = value; }
         public Guid CarId { get => carID; }
         public Guid FleetGuid { get => fleetGuid; }
+        public string CarDescription { get => carName; set => carName = value;  }
 
     }
 }

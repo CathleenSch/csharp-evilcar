@@ -5,6 +5,7 @@
       <manager guid="84b47e6c-4c99-4969-b13b-3063af8de9cf">
       </manager>
       <manager guid="7892e095-d7e8-4e95-b54c-706b1689a9d0" />
+      <manager guid="b3d08404-fcdc-4c6e-8f74-79cd69838ced" />
     </branch>
     <branch name="GermanyMunich" guid="cf0b0f89-945d-4886-a709-19273f7d9639" />
   </branches>
@@ -15,5 +16,6 @@
     </car>
     <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="CITY" price="30" status="BOOKED" guid="10a0ba9f-93ee-42cf-b2d1-32f984d5b0fc">
     </car>
+    <car type="SUV" price="34" guid="df8f027c-3b8a-4db7-ab1b-a1204931488b" fleetGuid="84b47e6c-4c99-4969-b13b-3063af8de9cf" status="FREE" />
   </carDB>
 </fleetDB>

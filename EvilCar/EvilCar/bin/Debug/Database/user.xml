@@ -1,19 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <userDB>
   <adminCollection>
-    <admin firstName="System" lastName="Admin" guid="663e75e3-6081-4b83-9851-d052e0b2ceb8" password="cHcxMjM0" userName="SysAdmin">
-    </admin>
-    <admin firstName="Clint" lastName="Barton" guid="f24ed7f3-ea7e-47e3-80e0-94166b350cf7" userName="cbarton" password="StartPassword" />
-    <admin firstName="Steve" lastName="Rogers" guid="3cd4233f-11f4-434e-9f90-15271fadcbee" userName="SRogers" password="StartPassword" />
+    <admin firstName="System" lastName="Admin" guid="663e75e3-6081-4b83-9851-d052e0b2ceb8" password="cHcxMjM0" userName="SysAdmin"></admin>
   </adminCollection>
   <managerCollection>
-    <manager firstName="System" lastName="Manager" guid="84b47e6c-4c99-4969-b13b-3063af8de9cf" password="cHc0MzIx" userName="SysManager">
-    </manager>
-    <manager firstName="Nat" lastName="Rom" guid="7b6da892-817f-4e07-82a9-a14fb218ee05" userName="nrom" password="StartPassword" />
-    <manager firstName="Tony" lastName="Stark" guid="7892e095-d7e8-4e95-b54c-706b1689a9d0" userName="tstark" password="StartPassword" />
+    <manager firstName="System" lastName="Manager" guid="84b47e6c-4c99-4969-b13b-3063af8de9cf" password="cHc0MzIx" userName="SysManager"></manager>
   </managerCollection>
-  <customerCollection>
-    <customer firstName="System" lastName="Customer" guid="9d3054c9-70a2-4059-ac8e-fdf1d303d349">
-    </customer>
-  </customerCollection>
 </userDB>

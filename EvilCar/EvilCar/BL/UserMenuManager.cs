@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace EvilCar.BL
 {
-    class ManagerUserMenu
+    class UserMenuManagerView
     {
         private Guid managerId;
-        public ManagerUserMenu(Guid managerID)
+        public UserMenuManagerView(Guid managerID)
         {
             this.managerId = managerID;
         }
@@ -23,8 +23,9 @@ namespace EvilCar.BL
             userSelection = Console.ReadKey().KeyChar;
             if (userSelection == '1')
             {
-                Console.WriteLine("/n 1.New Customer 2.Info about a Admin 3. Update Customer 4.Back to Main Menu");
+                Console.WriteLine("\n 1.New Customer 2.Info about a Admin 3. Update Customer 4.Back to Main Menu");
                 userSelection = Console.ReadKey().KeyChar;
+                Console.WriteLine("\n");
                 //NewAdmin or AdminInfo
                 if (userSelection == '1')
                 {
@@ -50,6 +51,7 @@ namespace EvilCar.BL
             {
                 Console.WriteLine("1.Add car 2.Info about about own fleet 3.Main Menu");
                 userSelection = Console.ReadKey().KeyChar;
+                Console.WriteLine("\n");
                 //NewFM InfoFM DeleteFM
                 if (userSelection == '1')
                 {
@@ -68,12 +70,13 @@ namespace EvilCar.BL
             }
             else if (userSelection == '3')
             {
-                //manager.updateOwnProfile();
+                Console.WriteLine("\n");
+                manager.updateOwnProfile(managerId);
 
             }
             else if (userSelection == '4')
             {
-                Console.WriteLine("Press any key to exit");
+                Console.WriteLine("Press any key to exit\n");
                 Console.Read();
                 Environment.Exit(0);
             }

@@ -39,14 +39,15 @@ namespace EvilCar.BL
                 }
             } catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Unable to find this user");
+
             }
             
             return user;
         }
 
-        public EvilCarUser searchUser(string username)
+        //Find a user within the system
+        //set the type according to location of finding
+        public EvilCarUser searchSystemUser(string username)
         {
             EvilCarUser user;
             user = getUserInformation("admin", username);
@@ -59,7 +60,8 @@ namespace EvilCar.BL
                     if (user.UserID == Guid.Empty)
                     {
                         throw new System.NullReferenceException("User does not exist in system.");
-                    } else
+                    }
+                    else
                     {
                         user.Type = EvilCarUser.UserType.CUSTOMER;
                     }
@@ -96,7 +98,7 @@ namespace EvilCar.BL
             else
             {
                 type = "customer";
-                nodeCollection = "userDB/customerCollection";
+                nodeCollection = "customerCollection";
             }
 
             collection = doc.SelectSingleNode(nodeCollection);
@@ -111,14 +113,19 @@ namespace EvilCar.BL
             xc.Value = user.UserID.ToString();
             XmlAttribute xd = doc.CreateAttribute("userName");
             xd.Value = user.UserName;
-            XmlAttribute xe = doc.CreateAttribute("password");
-            xe.Value = user.Password;
+
+            //Only Admins and Manager have passwords
+            if(user.Type != EvilCarUser.UserType.CUSTOMER)
+            {
+                XmlAttribute xe = doc.CreateAttribute("password");
+                xe.Value = user.Password;
+                newNode.Attributes.Append(xe);
+            }
 
             newNode.Attributes.Append(xa);
             newNode.Attributes.Append(xb);
             newNode.Attributes.Append(xc);
             newNode.Attributes.Append(xd);
-            newNode.Attributes.Append(xe);
 
             collection.AppendChild(newNode);
 
@@ -148,12 +155,15 @@ namespace EvilCar.BL
             xd.Value = car.FleetGuid.ToString();
             XmlAttribute xe = doc.CreateAttribute("status");
             xe.Value = car.CarStatus.ToString();
+            XmlAttribute xf = doc.CreateAttribute("description");
+            xf.Value = car.CarDescription.ToString();
 
             newNode.Attributes.Append(xa);
             newNode.Attributes.Append(xb);
             newNode.Attributes.Append(xc);
             newNode.Attributes.Append(xd);
             newNode.Attributes.Append(xe);
+            newNode.Attributes.Append(xf);
 
             collection.AppendChild(newNode);
 

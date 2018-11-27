@@ -6,7 +6,4 @@
   <managerCollection>
     <manager firstName="System" lastName="Manager" guid="84b47e6c-4c99-4969-b13b-3063af8de9cf" password="cHc0MzIx" userName="SysManager"></manager>
   </managerCollection>
-  <customerCollection>
-    <customer firstName="System" lastName="Customer" guid="9d3054c9-70a2-4059-ac8e-fdf1d303d349"></customer>
-  </customerCollection>
 </userDB>

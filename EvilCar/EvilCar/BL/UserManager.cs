@@ -15,6 +15,7 @@ namespace EvilCar.BL
         public UserManager(string xmlPath)
         {
             this.xmlManager = new XmlManager(xmlPath);
+            this.loginManager = new LoginManager();
         }
 
         #region User Management
@@ -36,7 +37,11 @@ namespace EvilCar.BL
 
             newUser.Type = type;
             newUser.UserID = Guid.NewGuid();
-            newUser.Password = loginManager.encodePassword("StartPassword");
+
+            if(type != EvilCarUser.UserType.CUSTOMER)
+            {
+                newUser.Password = loginManager.encodePassword("StartPassword");
+            }            
 
             xmlManager.newUserNode(newUser);
 

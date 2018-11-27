@@ -15,7 +15,7 @@ namespace EvilCar
             EvilCarUser CurrentUser = null;
             LoginManager loginManager = new LoginManager();
 
-            Console.Write("Welcome to the evil car management portal. Please login to continue.");
+            Console.Write("Welcome to the evil car management portal. Please login to continue.\n");
 
             while(CurrentUser == null)
             {
@@ -27,11 +27,11 @@ namespace EvilCar
 
             if(CurrentUser.Type == EvilCarUser.UserType.ADMIN)
             {
-                AdminUserMenu menu = new AdminUserMenu();
+                UserMenuAdminView menu = new UserMenuAdminView();
                 menu.Start();
             } else if (CurrentUser.Type == EvilCarUser.UserType.FLEET_MANAGER)
             {
-                ManagerUserMenu menu = new ManagerUserMenu(CurrentUser.UserID);
+                UserMenuManagerView menu = new UserMenuManagerView(CurrentUser.UserID);
                 menu.Start();
             } else
             {

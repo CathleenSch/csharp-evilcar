@@ -30,9 +30,18 @@ namespace EvilCar.BL {
                 password += key.KeyChar;
             }
 
-            user = manager.searchUser(username);
+            try
+            {
+                user = manager.searchSystemUser(username);
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
 
-            if(decodePassword(user.Password) == password)
+            Console.WriteLine("\n");
+
+            if (decodePassword(user.Password) == password)
             {
                 Console.WriteLine("Logged in!");
                 return user;
