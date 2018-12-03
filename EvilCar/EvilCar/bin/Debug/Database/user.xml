@@ -3,11 +3,18 @@
   <adminCollection>
     <admin firstName="System" lastName="Admin" guid="663e75e3-6081-4b83-9851-d052e0b2ceb8" password="cHcxMjM0" userName="SysAdmin">
     </admin>
+    <admin password="U3RhcnRQYXNzd29yZA==" firstName="Bruce" lastName="Banner" guid="a20aae0b-d62b-41df-8b05-ea14cd862226" userName="BruceBanner1" />
+    <admin password="U3RhcnRQYXNzd29yZA==" firstName="Loki" lastName="Laufeyson" guid="22443f64-b235-49df-8782-eb9c16048c81" userName="LLaufeyson" />
+    <admin password="SGFtbWVyVGltZQ==" firstName="Thor" lastName="Odinson" guid="3659b55d-7a72-4b40-b398-2231e40e1345" userName="TOdinson" />
   </adminCollection>
   <managerCollection>
     <manager firstName="System" lastName="Manager" guid="84b47e6c-4c99-4969-b13b-3063af8de9cf" password="aGVsbG9Xb3JsZA==" userName="SysManager">
     </manager>
     <manager password="VG9ueXNQYXNzd29yZA==" firstName="Tony" lastName="Stark" guid="61f530ac-4866-4672-add3-bbb6ec17e9ca" userName="tstark" />
-    <manager password="aGF3a2d1eQ==" firstName="Clint" lastName="Barton" guid="2c5a180c-c59e-4acb-801b-89ec76f6799c" userName="cbarton" />
+    <manager password="SGF3a2d1eTEyMw==" firstName="Clint" lastName="Barton" guid="2c5a180c-c59e-4acb-801b-89ec76f6799c" userName="cBarton" />
+    <manager password="U3RhcnRQYXNzd29yZA==" firstName="Peter" lastName="Parker" guid="a8768898-5214-4baf-8afc-6197f3d0bda6" userName="PParker" />
+    <manager password="U3RhcnRQYXNzd29yZA==" firstName="Wade" lastName="Wilson" guid="4403f219-f6f8-4919-9d01-7b586041d7e0" userName="WWilson" />
+    <manager password="Q2FwdGFpblNwYW5kZXg=" firstName="Stevie" lastName="Rogers" guid="d4da78c0-02c9-4cca-8bdd-8c9471600742" userName="StRogers" />
+    <manager password="U3RhcnRQYXNzd29yZA==" firstName="Steve" lastName="Rogers" guid="0fc86b63-2a33-48ed-a7fe-0e2bf6fbb103" userName="sRogers" />
   </managerCollection>
 </userDB>

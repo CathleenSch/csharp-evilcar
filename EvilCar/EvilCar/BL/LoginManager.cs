@@ -12,15 +12,21 @@ namespace EvilCar.BL {
 
         private static string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\user.xml");
         XmlManager manager = new XmlManager(path);
+        Services inputService = new Services();
 
         public EvilCarUser UserLogin()
         {
             EvilCarUser user = new EvilCarUser();
-            string username;
+            string username = "";
             string password = null;
 
             Console.Write("Please enter your username: ");
             username = Console.ReadLine();
+            while (!inputService.validInput(username))
+            {
+                Console.Write("Please enter your username: ");
+                username = Console.ReadLine();
+            }
             Console.Write("Please enter your password: ");
             while (true)
             {

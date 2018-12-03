@@ -1,22 +1,28 @@
-﻿using System;
+﻿using EvilCar.DL;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EvilCar.BL {
     class Services {
-        public string generateUsername (string firstName, string lastName, string userType) {
+        private static string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\user.xml");
+
+        public string generateUsername (string firstName, string lastName) {
+            firstName = firstName.ToLower();
             string username = firstName[0] + lastName;
             int count = 1;
 
-            XmlManager xml = new XmlManager("/*need location*/");
+            XmlManager xml = new XmlManager(path);
 
             for (int i = 1; i < firstName.Length; i++) {
                 try {
                     xml.searchSystemUser(username);
                 } catch (Exception e) {
-                    break;
+                    return username;
                 }
 
                 username = "";
@@ -37,6 +43,33 @@ namespace EvilCar.BL {
             }
 
             return username;
+        }
+
+        public bool validInput (string inputFromConsole)
+        {
+            if(String.IsNullOrEmpty(inputFromConsole))
+            {
+                Console.WriteLine("Empty input.");
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
+
+        public int validIntInput (string intNumber)
+        {
+            int j;
+
+            if (Int32.TryParse(intNumber, out j))
+            {
+                return j;
+            }  else
+            {
+                Console.WriteLine("String could not be parsed.");
+                return -1;
+            }
+               
         }
     }
 }

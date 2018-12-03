@@ -178,6 +178,7 @@ namespace EvilCar.BL
             {
                 XmlNode manager = findNodeBasedOnAttributeValue("manager", "guid", id.ToString("D"));
                 fleet.FleetId = Guid.Parse(manager.ParentNode.Attributes["guid"]?.InnerText);
+                fleet.Name = manager.ParentNode.Attributes["name"]?.InnerText;
             }
             catch (Exception ex)
             {
@@ -278,8 +279,16 @@ namespace EvilCar.BL
         #region General
         public void removeNode(string elementName, string attribute, string searchValue)
         {
+            XmlNode parentNode;
             XmlNode node = findNodeBasedOnAttributeValue(elementName, attribute, searchValue);
-            XmlNode parentNode = node.ParentNode;
+            if(node == null)
+            {
+                return;
+            } else
+            {
+                parentNode = node.ParentNode;
+            }
+
             if (checkChildCount(parentNode) > 1) {
                 parentNode.RemoveChild(node);
                 doc.Save(location);

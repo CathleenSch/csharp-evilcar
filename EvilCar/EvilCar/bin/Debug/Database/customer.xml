@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <customerCollection>
   <customer firstName="System" lastName="Customer" guid="9d3054c9-70a2-4059-ac8e-fdf1d303d349">
   </customer>
@@ -6,4 +6,5 @@
   </customer>
   <customer firstName="System" lastName="Customer" guid="e9a8cc85-fb69-4a53-9f14-0c7946a6fdcd">
   </customer>
+  <customer firstName="James Buchanan" lastName="Barnes" guid="3c0694a7-294b-4c2e-83e7-0b43104fb54b" userName="jBarnes" />
 </customerCollection>

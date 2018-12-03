@@ -13,15 +13,19 @@ namespace EvilCar.BL
     {
         private static string pathCustomerXml = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\customer.xml");
         private static string pathFleetXml = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\fleet.xml");
+        private static string pathUserrXml = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Database\user.xml");
         FleetManager fleetManager;
+        UserManager customerManager;
         UserManager userManager;
+
 
         //Constructor
         //Initiate instance of all required managers
         public FleetManagerManager()
         {
             fleetManager = new FleetManager(pathFleetXml);
-            userManager = new UserManager(pathCustomerXml);
+            customerManager = new UserManager(pathCustomerXml);
+            userManager = new UserManager(pathUserrXml);
         }
 
         #region administerCustomers
@@ -34,7 +38,7 @@ namespace EvilCar.BL
         public void CreateNewCustomer()
         {
             Console.WriteLine("You are creating a new Customer Profile.");
-            userManager.newUser(EvilCarUser.UserType.CUSTOMER);
+            customerManager.newUser(EvilCarUser.UserType.CUSTOMER);
         }
 
         public void ReadCustomerInfo()
@@ -44,7 +48,7 @@ namespace EvilCar.BL
             Console.WriteLine("Enter an userName to get their details.");
             searchInput = Console.ReadLine();
             Console.WriteLine("You requested info on {0}", searchInput);
-            userManager.fetchUserInfo("customer", searchInput);
+            customerManager.fetchUserInfo("customer", searchInput);
         }
 
         public void UpdateCustomerProfile()
@@ -54,7 +58,7 @@ namespace EvilCar.BL
             Guid emptyGuid = new Guid(bytes);
 
             Console.WriteLine("You choose to update a customer profile.");
-            userManager.changeUserInfo("customer", emptyGuid);
+            customerManager.changeUserInfo("customer", emptyGuid);
         }
 
         public void MakeCostEstimation(Guid managerGuid)
@@ -72,7 +76,7 @@ namespace EvilCar.BL
         public void updateOwnProfile(Guid id)
         {
             Console.WriteLine("You choose to update your own profile.");
-            userManager.changeUserInfo("customer", id);
+            userManager.changeUserInfo("manager", id);
         }
         #endregion
 

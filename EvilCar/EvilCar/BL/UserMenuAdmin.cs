@@ -8,16 +8,22 @@ namespace EvilCar.BL
 {
     class UserMenuAdminView
     {
+        private Guid managerId;
+        public UserMenuAdminView(Guid managerID)
+        {
+            this.managerId = managerID;
+        }
+
         public void Start()
         {
             char userSelection;
             AdminManager manager = new AdminManager();
 
-            Console.WriteLine("1.Admin Administration 2.Fleet Manager Administration 3.FleetAdministration 4.Exit");
+            Console.WriteLine("1. Admin Administration \t 2. Fleet Manager Administration \t 3. FleetAdministration \t 4. Exit");
             userSelection = Console.ReadKey().KeyChar;
             if (userSelection == '1')
             {
-                Console.WriteLine("\n 1.New Admin 2.Info about a Admin 3. Change own information 4.Back to Main Menu");
+                Console.WriteLine("\n 1. New Admin \t 2. Info about a Admin \t 3. Change own information \t 4. Back to Main Menu");
                 userSelection = Console.ReadKey().KeyChar;
                 Console.WriteLine("\n");
                 //NewAdmin or AdminInfo
@@ -29,7 +35,7 @@ namespace EvilCar.BL
                 }
                 else if (userSelection == '3')
                 {
-                    //manager.updateOwnProfile();
+                    manager.updateOwnProfile(managerId);
                 }
                 else
                 {
@@ -39,7 +45,7 @@ namespace EvilCar.BL
                 }
 
             } else if (userSelection == '2') {
-                Console.WriteLine("\n1.New Manager 2.Info about a Manager 3.Delete Manager 4.Change Manager Profile");
+                Console.WriteLine("\n1. New Manager \t 2. Info about a Manager \t 3. Delete Manager \t 4. Change Manager Profile");
                 userSelection = Console.ReadKey().KeyChar;
                 Console.WriteLine("\n");
                 //NewFM InfoFM DeleteFM
@@ -66,7 +72,7 @@ namespace EvilCar.BL
             }
             else if (userSelection == '3')
             {
-                Console.WriteLine("\n 1.New Branch 2.Exit to main menu");
+                Console.WriteLine("\n 1. New Branch \t 2. Exit to main menu");
                 userSelection = Console.ReadKey().KeyChar;
                 Console.WriteLine("\n");
                 if (userSelection == '1')

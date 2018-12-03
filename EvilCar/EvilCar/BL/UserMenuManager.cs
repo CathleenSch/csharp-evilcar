@@ -19,11 +19,11 @@ namespace EvilCar.BL
             char userSelection;
             FleetManagerManager manager = new FleetManagerManager();
 
-            Console.WriteLine("1.Customer Administration 2.Fleet Administration 3.Profile Changes 4.Exit");
+            Console.WriteLine("1. Customer Administration \t 2. Fleet Administration \t 3. Profile Changes \t 4. Exit");
             userSelection = Console.ReadKey().KeyChar;
             if (userSelection == '1')
             {
-                Console.WriteLine("\n 1.New Customer 2.Info about a Admin 3.Update Customer 4.Estimate rental cost 5.Back to Main Menu");
+                Console.WriteLine("\n 1. New Customer \t 2. Info about a Customer \t 3. Update Customer \t 4. Estimate rental cost \t 5. Back to Main Menu");
                 userSelection = Console.ReadKey().KeyChar;
                 Console.WriteLine("\n");
                 //NewAdmin or AdminInfo
@@ -53,7 +53,7 @@ namespace EvilCar.BL
             }
             else if (userSelection == '2')
             {
-                Console.WriteLine("1.Add car 2.Info about about own fleet 3.Main Menu");
+                Console.WriteLine("\n1. Add car \t 2 .Info about about own fleet \t 3. Main Menu");
                 userSelection = Console.ReadKey().KeyChar;
                 Console.WriteLine("\n");
                 //NewFM InfoFM DeleteFM

@@ -10,6 +10,7 @@ namespace EvilCar.BL
     class FleetManager : XmlManager
     {
         XmlManager xmlManager;
+        Services inputServices = new Services();
 
         public FleetManager(string xmlPath) : base(xmlPath)
         {
@@ -22,12 +23,14 @@ namespace EvilCar.BL
         */
         //Input dialog for a new Car
         //requires the branchGuid of the branch the logged in manager manages
-        public void addCarToFleet(Guid branchGuid)
+        public void addCarToFleet(Guid managerGuid)
         {
             Car newCar = new Car();
+            Fleet fleet = xmlManager.getFleetInformation(managerGuid);
             char userSelection;
+            int hourlyFee;
 
-            Console.WriteLine("What Type of Car are you adding? \n 1.City 2.SUV 3.Convertible 4.Limousine");
+            Console.WriteLine("What Type of Car are you adding? \n 1. City \t 2. SUV \t 3. Convertible \t 4. Limousine");
             userSelection = Console.ReadKey().KeyChar;
             if (userSelection == '1')
             {
@@ -50,27 +53,39 @@ namespace EvilCar.BL
             }
 
             Console.WriteLine("\n What is the hourly fee for this car?");
-            newCar.PricePerHour = Convert.ToInt32(Console.ReadLine());
+            hourlyFee = inputServices.validIntInput(Console.ReadLine());
+            while(hourlyFee == -1)
+            {
+                Console.WriteLine("\n What is the hourly fee for this car?");
+                hourlyFee = inputServices.validIntInput(Console.ReadLine());
+            }
+            newCar.PricePerHour = hourlyFee;
+           
             Console.WriteLine("\n Enter a brief description");
             newCar.CarDescription = Console.ReadLine();
+           if(String.IsNullOrEmpty(newCar.CarDescription))
+            {
+                newCar.CarDescription = "";
+            }
+
             newCar.CarStatus = Car.Status.FREE;
 
-            newCar.CreateNewCar(newCar.PricePerHour, newCar.CarType, branchGuid);
+            newCar.CreateNewCar(newCar.PricePerHour, newCar.CarType, fleet.FleetId);
 
             xmlManager.newCarNode(newCar);
 
             Console.WriteLine("Succesfully created a new {0} car, priced {1} per hour", newCar.CarType, newCar.PricePerHour);
         }
 
-        public void getFleetOverview(Guid branchGuid)
+        public void getFleetOverview(Guid managerGuid)
         {
-            Fleet fleet = xmlManager.getFleetInformation(branchGuid);
+            Fleet fleet = xmlManager.getFleetInformation(managerGuid);
             Console.WriteLine("Your branch is called: {0}", fleet.Name);
             Console.WriteLine("This is a list of all cars in your fleet.");
             List<Car> cars = xmlManager.getCarInformation(fleet.FleetId);
             foreach( Car c in cars)
             {
-                Console.WriteLine("Status: {0} \t Type: {1} \t Price: {2}", c.CarStatus, c.CarType, c.PricePerHour);
+                Console.WriteLine("Status: {0} \t Type: {1} \t  Price: {2}", c.CarStatus, c.CarType, c.PricePerHour);
             }
             
         }
@@ -85,8 +100,20 @@ namespace EvilCar.BL
         {
             Console.WriteLine("To which branch would you like to assign this manager?");
             string searchInput = Console.ReadLine();
-            xmlManager.newManagerNode(managerId, searchInput);
-            Console.WriteLine("Successfully assigned this manager");
+            while (!inputServices.validInput(searchInput))
+            {
+                Console.WriteLine("To which branch would you like to assign this manager?");
+                searchInput = Console.ReadLine();
+            }
+            try
+            {
+                xmlManager.newManagerNode(managerId, searchInput);
+                Console.WriteLine("Successfully assigned this manager");
+            } catch (Exception ex)
+            {
+                throw new System.MemberAccessException("Fleet not found");
+            }
+
         }
 
         #region Cost Estimation
@@ -116,18 +143,36 @@ namespace EvilCar.BL
             }
             Console.WriteLine("\n");
             string s1 = Console.ReadLine();
-            try
+            if (String.IsNullOrEmpty(s1))
             {
-                int[] selectionArray = s1.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-                for(int i=0;i< selectionArray.Length;i++)
+                Console.WriteLine("No services selected.");
+            } else
+            {
+                try
                 {
-                    serviceSelection[selectionArray[i]] = 1;
+                    int[] selectionArray = s1.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
+                    for (int i = 0; i < selectionArray.Length; i++)
+                    {
+                        //in case of not a limousine tell user service is unavailable
+                        if (availableServices[selectionArray[i]].Name == "Massage" && cars[carSelection].CarType != Car.TypeOfCar.LIMOUSINE)
+                        {
+                            Console.WriteLine("{0} Service unavailable.", availableServices[selectionArray[i]].Name);
+                            serviceSelection[selectionArray[i]] = 0;
+                        }
+                        else
+                        {
+                            serviceSelection[selectionArray[i]] = 1;
+                        }
+                    }
                 }
-            } catch(Exception ex)
-            {
-                Console.WriteLine("Invalid input. Start cost estimation over.");
-                return;
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Invalid input. Start cost estimation over.");
+                    return;
+                }
             }
+           
+
             totalCost = CalculateCost(cars[carSelection].PricePerHour, rentDuration, serviceSelection);
             Console.WriteLine("the estimated total for this rent process will be {0}", totalCost);
 

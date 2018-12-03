@@ -11,7 +11,7 @@ namespace EvilCar.BL
 
         public async Task sendMailToManager()
         {
-            Console.WriteLine("Sending updated password to your manager");
+            Console.WriteLine("Sending update information");
 
             // random waiting time between 5-10 sec
             Random rnd = new Random();

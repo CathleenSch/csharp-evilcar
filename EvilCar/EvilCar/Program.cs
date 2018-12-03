@@ -25,7 +25,7 @@ namespace EvilCar
 
             if(CurrentUser.Type == EvilCarUser.UserType.ADMIN)
             {
-                UserMenuAdminView menu = new UserMenuAdminView();
+                UserMenuAdminView menu = new UserMenuAdminView(CurrentUser.UserID);
 
                 while (true)
                 {

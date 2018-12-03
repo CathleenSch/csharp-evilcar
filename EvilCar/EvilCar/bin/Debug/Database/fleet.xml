@@ -7,10 +7,13 @@
         </manager>
         <manager guid="61f530ac-4866-4672-add3-bbb6ec17e9ca" />
         <manager guid="2c5a180c-c59e-4acb-801b-89ec76f6799c" />
+        <manager guid="a8768898-5214-4baf-8afc-6197f3d0bda6" />
       </fleet>
       <fleet name="Munich" guid="8f44027c-bd29-4e4b-a2b4-42121efad10d">
+        <manager guid="4403f219-f6f8-4919-9d01-7b586041d7e0" />
       </fleet>
     </branch>
+    <branch name="Berlin" guid="ac4746d6-ae17-4463-8b5a-21385536d6f9" />
   </branches>
   <carDB>
     <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="CITY" price="20" status="FREE" guid="82aed5b5-3d33-4647-a5e1-1f172a540218">
@@ -19,6 +22,7 @@
     </car>
     <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="CITY" price="30" status="BOOKED" guid="10a0ba9f-93ee-42cf-b2d1-32f984d5b0fc">
     </car>
+    <car type="CONVERTIBLE" price="60" guid="377cf796-06c8-45de-95ca-ec63a796f901" fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" status="FREE" description="sporty" />
   </carDB>
   <servicesDB>
     <service name="Spotify" price="25">

@@ -12,6 +12,7 @@ namespace EvilCar.BL
         XmlManager xmlManager;
         LoginManager loginManager;
         EmailManager emailManager = new EmailManager();
+        Services userService = new Services();
 
         public UserManager(string xmlPath)
         {
@@ -33,8 +34,8 @@ namespace EvilCar.BL
             newUser.FirstName = Console.ReadLine();
             Console.WriteLine("Enter their last Name.");
             newUser.LastName = Console.ReadLine();
-            Console.WriteLine("Enter their user Name.");
-            newUser.UserName = Console.ReadLine();
+            newUser.UserName = userService.generateUsername(newUser.FirstName, newUser.LastName);
+            Console.WriteLine("Automatically generate username is, {0}.", newUser.UserName);
 
             newUser.Type = type;
             newUser.UserID = Guid.NewGuid();
@@ -91,33 +92,47 @@ namespace EvilCar.BL
                 userId = user.UserID;
             } 
 
-            Console.WriteLine("What info needs changining?\n 1.First Name 2.Last Name 3.User Name 4.Password");
+            if(userId == Guid.Empty)
+            {
+                Console.WriteLine("User doesn't exist");
+                return;
+            }
+
+            if (type != "customer")
+            {
+                Console.WriteLine("What info needs changining?\n 1.First Name 2.Last Name 3.User Name 4.Password");
+            } else
+            {
+                Console.WriteLine("What info needs changining?\n 1.First Name 2.Last Name 3.User Name");
+            }
+           
             selection = Console.ReadKey().KeyChar;
             Console.WriteLine("\nEnter the new value.");
-            switch (selection)
+            if (selection == '1') {
+
+                newValue = Console.ReadLine();
+                changeParam = "firstName";
+            } else if(selection == '2')
             {
-                case '1':
-                    newValue = Console.ReadLine();
-                    changeParam = "firstName";
-                    break;
-                case '2':
-                    newValue = Console.ReadLine();
-                    changeParam = "lastName";
-                    break;
-                case '3':
-                    newValue = Console.ReadLine();
-                    changeParam = "userName";
-                    break;
-                case '4':
-                    newValue = Console.ReadLine();
-                    changeParam = "password";
-                    newValue = loginManager.encodePassword(newValue);
-                    break;
+                newValue = Console.ReadLine();
+                changeParam = "lastName";
+            } else if(selection == '3')
+            {
+                newValue = Console.ReadLine();
+                changeParam = "userName";
+            } else if(selection == '4' && type != "customer")
+            {
+                newValue = Console.ReadLine();
+                changeParam = "password";
+                newValue = loginManager.encodePassword(newValue);
+            } else
+            {
+                Console.WriteLine("Invalid selection");
+                return;
             }
 
             //Change entry in XML file use id to find user and param to change correct info
             xmlManager.changeInformationBasedOnGuid(type, userId.ToString(), changeParam, newValue);
-            emailManager.sendMailToManager()
             if (selection == '4')
             {
                 await emailManager.sendMailToManager();
