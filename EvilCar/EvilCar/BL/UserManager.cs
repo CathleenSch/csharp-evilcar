@@ -11,6 +11,7 @@ namespace EvilCar.BL
     {
         XmlManager xmlManager;
         LoginManager loginManager;
+        EmailManager emailManager = new EmailManager();
 
         public UserManager(string xmlPath)
         {
@@ -74,7 +75,7 @@ namespace EvilCar.BL
         //Access User in DB file via their id and change their information
         //in case of empty id a username is required to find the user
         //userType is passed as parameter to ensure a user can't find users of types they're not supposed to view
-        public void changeUserInfo(string type, Guid id)
+        public async void changeUserInfo(string type, Guid id)
         {
             char selection;
             Guid userId = id;
@@ -110,12 +111,17 @@ namespace EvilCar.BL
                 case '4':
                     newValue = Console.ReadLine();
                     changeParam = "password";
+                    newValue = loginManager.encodePassword(newValue);
                     break;
             }
 
             //Change entry in XML file use id to find user and param to change correct info
             xmlManager.changeInformationBasedOnGuid(type, userId.ToString(), changeParam, newValue);
-            Console.WriteLine("Value changed.");
+            emailManager.sendMailToManager()
+            if (selection == '4')
+            {
+                await emailManager.sendMailToManager();
+            }
         }
 
         public EvilCarUser deleteUser(string type, string userName)
@@ -135,5 +141,6 @@ namespace EvilCar.BL
         }
 
         #endregion
+
     }
 }

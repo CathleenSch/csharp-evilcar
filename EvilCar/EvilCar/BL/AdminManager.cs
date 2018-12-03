@@ -92,6 +92,17 @@ namespace EvilCar.BL
                 Console.WriteLine("Successfully deleted {0} {1}", user.FirstName, user.LastName);
             }            
         }
+
+        public void updateFleetManager()
+        {
+
+            Byte[] bytes = new Byte[16];
+            Guid emptyGuid = new Guid(bytes);
+
+
+            Console.WriteLine("You choose to update one of the fleet managers profiles.");
+            changeUserInfo("manager", emptyGuid);
+        }
         #endregion
 
         #region administerSelf

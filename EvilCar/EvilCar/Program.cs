@@ -22,21 +22,29 @@ namespace EvilCar
                 CurrentUser = loginManager.UserLogin();
             }
 
-            //CurrentUser.Type = EvilCarUser.UserType.ADMIN;
-            //CurrentUser.UserID = new Guid("84b47e6c-4c99-4969-b13b-3063af8de9cf");
 
             if(CurrentUser.Type == EvilCarUser.UserType.ADMIN)
             {
                 UserMenuAdminView menu = new UserMenuAdminView();
-                menu.Start();
+
+                while (true)
+                {
+                    menu.Start();
+                }
+
             } else if (CurrentUser.Type == EvilCarUser.UserType.FLEET_MANAGER)
             {
                 UserMenuManagerView menu = new UserMenuManagerView(CurrentUser.UserID);
-                menu.Start();
+
+                while (true)
+                {
+                    menu.Start();
+                }
             } else
             {
                 Console.WriteLine("You don't have access to the admin or manager options. Please contact your system administator.");
             }
+
             Console.Read();
             
         }
