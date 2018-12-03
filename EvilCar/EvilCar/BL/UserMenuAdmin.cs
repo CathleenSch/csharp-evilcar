@@ -39,7 +39,7 @@ namespace EvilCar.BL
                 }
 
             } else if (userSelection == '2') {
-                Console.WriteLine("\n1.New Manager 2.Info about a Manager 3.Delete Manager 4.Change Manager Profile");
+                Console.WriteLine("\n1.New Manager 2.Info about a Manager 3.Delete Manager");
                 userSelection = Console.ReadKey().KeyChar;
                 Console.WriteLine("\n");
                 //NewFM InfoFM DeleteFM
@@ -53,9 +53,6 @@ namespace EvilCar.BL
                 } else if (userSelection == '3')
                 {
                     manager.deleteFleetManager();
-                } else if (userSelection == '4')
-                {
-                    manager.updateFleetManager();
                 }
                 else
                 {

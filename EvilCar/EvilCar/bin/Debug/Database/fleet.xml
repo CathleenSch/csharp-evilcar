@@ -1,33 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <fleetDB>
   <branches>
     <branch name="Germany" guid="d4593dee-ad75-400d-944b-1b3749c88522">
       <fleet name="Stuttgart" guid="56294f7d-d329-4ef2-879c-41af678953af">
-        <manager guid="84b47e6c-4c99-4969-b13b-3063af8de9cf">
-        </manager>
-        <manager guid="61f530ac-4866-4672-add3-bbb6ec17e9ca" />
-        <manager guid="2c5a180c-c59e-4acb-801b-89ec76f6799c" />
+        <manager guid="84b47e6c-4c99-4969-b13b-3063af8de9cf"></manager>
       </fleet>
-      <fleet name="Munich" guid="8f44027c-bd29-4e4b-a2b4-42121efad10d">
-      </fleet>
+      <fleet name="Munich" guid="8f44027c-bd29-4e4b-a2b4-42121efad10d">       
+      </fleet>    
     </branch>
   </branches>
   <carDB>
-    <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="CITY" price="20" status="FREE" guid="82aed5b5-3d33-4647-a5e1-1f172a540218">
-    </car>
-    <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="LIMOUSINE" price="100" status="FREE" guid="be9fbbb-377a-48ed-b980-d54dadd9604d">
-    </car>
-    <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="CITY" price="30" status="BOOKED" guid="10a0ba9f-93ee-42cf-b2d1-32f984d5b0fc">
-    </car>
+    <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="CITY" price="20" status="FREE" guid="82aed5b5-3d33-4647-a5e1-1f172a540218"></car>
+    <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="LIMOUSINE" price="100" status="FREE" guid="be9fbbb-377a-48ed-b980-d54dadd9604d"></car>
+    <car fleetGuid="56294f7d-d329-4ef2-879c-41af678953af" type="CITY" price="30" status="BOOKED" guid="10a0ba9f-93ee-42cf-b2d1-32f984d5b0fc"></car>
   </carDB>
   <servicesDB>
-    <service name="Spotify" price="25">
-    </service>
-    <service name="Parker" price="20">
-    </service>
-    <service name="Navigation" price="50">
-    </service>
-    <service name="Massage" price="100">
-    </service>
+    <service name="Spotify" price="25"></service>
+    <service name="Parker" price="20"></service>
+    <service name="Navigation" price="50"></service>
+    <service name="Massage" price="100"></service>
   </servicesDB>
 </fleetDB>

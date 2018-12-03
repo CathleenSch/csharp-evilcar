@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\AdminManager.cs" />
-    <Compile Include="BL\EmailManager.cs" />
     <Compile Include="BL\UserMenuAdmin.cs" />
     <Compile Include="BL\FleetManager.cs" />
     <Compile Include="BL\FleetManagerManager.cs" />
