@@ -28,7 +28,6 @@ namespace EvilCar.BL
             Car newCar = new Car();
             Fleet fleet = xmlManager.getFleetInformation(managerGuid);
             char userSelection;
-            int hourlyFee;
 
             Console.WriteLine("What Type of Car are you adding? \n 1. City \t 2. SUV \t 3. Convertible \t 4. Limousine");
             userSelection = Console.ReadKey().KeyChar;
@@ -52,14 +51,7 @@ namespace EvilCar.BL
                 return;
             }
 
-            Console.WriteLine("\n What is the hourly fee for this car?");
-            hourlyFee = inputServices.validIntInput(Console.ReadLine());
-            while(hourlyFee == -1)
-            {
-                Console.WriteLine("\n What is the hourly fee for this car?");
-                hourlyFee = inputServices.validIntInput(Console.ReadLine());
-            }
-            newCar.PricePerHour = hourlyFee;
+            newCar.PricePerHour = inputServices.validIntInput("\n What is the hourly fee for this car?");
            
             Console.WriteLine("\n Enter a brief description");
             newCar.CarDescription = Console.ReadLine();
@@ -77,6 +69,7 @@ namespace EvilCar.BL
             Console.WriteLine("Succesfully created a new {0} car, priced {1} per hour", newCar.CarType, newCar.PricePerHour);
         }
 
+        //returns a fleet overview based on the guid of the logged in manager
         public void getFleetOverview(Guid managerGuid)
         {
             Fleet fleet = xmlManager.getFleetInformation(managerGuid);
@@ -90,21 +83,19 @@ namespace EvilCar.BL
             
         }
 
+        //adds a branch
         public void addNewBranch(Branch branch)
         {
             xmlManager.newBranchNode(branch);
             Console.WriteLine("Successfully added branch {0}", branch.Name);
         }
 
+        //assigns a fleet manager
+        //puts the manager guid as references in the fleet DB
         public void assignFleetManager(Guid managerId)
         {
-            Console.WriteLine("To which branch would you like to assign this manager?");
-            string searchInput = Console.ReadLine();
-            while (!inputServices.validInput(searchInput))
-            {
-                Console.WriteLine("To which branch would you like to assign this manager?");
-                searchInput = Console.ReadLine();
-            }
+            string searchInput = inputServices.validInput("To which branch would you like to assign this manager?");
+            
             try
             {
                 xmlManager.newManagerNode(managerId, searchInput);
@@ -116,6 +107,9 @@ namespace EvilCar.BL
 
         }
 
+        //estimates the possible rental costs
+        //displays all cars available to the manager
+        //asks for duration of booking and required sevices
         #region Cost Estimation
         public void estimateRentalCost(Guid managerGuid)
         {
@@ -131,10 +125,9 @@ namespace EvilCar.BL
             {
                 Console.WriteLine("{0}. Status: {1} \t Type: {2} \t Price: {3}", i, cars[i].CarStatus, cars[i].CarType, cars[i].PricePerHour);
             }
-            Console.WriteLine("Select the number of the car to be rented.");
-            carSelection = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("How long will the car be needed (in hours)?");
-            int rentDuration = Convert.ToInt32(Console.ReadLine());
+
+            carSelection = inputServices.validIntInput("Select the number of the car to be rented.");
+            int rentDuration = inputServices.validIntInput("How long will the car be needed (in hours)?");
             Console.WriteLine("Which services are required? Seperate by comma!\n");
             availableServices = xmlManager.availableServices();
             for (int i = 0; i < availableServices.Count; i++)
@@ -178,6 +171,10 @@ namespace EvilCar.BL
 
         }
 
+        //Calculation happens here
+        //get service prices from fleet DB
+        //multiplies hourly Car Fee with selected duration
+        //returns total
         private int CalculateCost(int carFee, int duration, int[] services)
         {
             int total = carFee*duration;

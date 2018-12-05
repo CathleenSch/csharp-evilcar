@@ -20,13 +20,7 @@ namespace EvilCar.BL {
             string username = "";
             string password = null;
 
-            Console.Write("Please enter your username: ");
-            username = Console.ReadLine();
-            while (!inputService.validInput(username))
-            {
-                Console.Write("Please enter your username: ");
-                username = Console.ReadLine();
-            }
+            username = inputService.validInput("Please enter your username: ");
             Console.Write("Please enter your password: ");
             while (true)
             {

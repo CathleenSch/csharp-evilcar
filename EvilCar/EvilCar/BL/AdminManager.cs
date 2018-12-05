@@ -40,13 +40,7 @@ namespace EvilCar.BL
 
 
             Console.WriteLine("You are requesting info about another Admin.");
-            Console.WriteLine("Enter an userName to get their details.");
-            searchInput = Console.ReadLine();
-            while(inputService.validInput(searchInput))
-            {
-                Console.WriteLine("Enter an userName to get their details.");
-                searchInput = Console.ReadLine();
-            }
+            searchInput = inputService.validInput("Enter an userName to get their details.");
             Console.WriteLine("You requested info on {0}", searchInput);
             fetchUserInfo("admin", searchInput);
         }
@@ -58,7 +52,8 @@ namespace EvilCar.BL
          * Includes all functions to do with the administration of fleet Managers
          * - CreateNewAFleetManager
          * - ReadfleetManagerInfos
-         * - ChangeFleetManagerPassword
+         * - Delete FleetManager
+         * - UpdateFleetManager
          */
         public void CreateNewFleetManager()
         {
@@ -80,13 +75,7 @@ namespace EvilCar.BL
             string searchInput;
 
             Console.WriteLine("You are requesting info about a Fleet Manager.");
-            Console.WriteLine("Enter an userName to get their details.");
-            searchInput = Console.ReadLine();
-            while (inputService.validInput(searchInput))
-            {
-                Console.WriteLine("Enter an userName to get their details.");
-                searchInput = Console.ReadLine();
-            }
+            searchInput = inputService.validInput("Enter an userName to get their details.");
             Console.WriteLine("You requested info on {0}", searchInput);
             fetchUserInfo("manager", searchInput);
         }
@@ -96,13 +85,7 @@ namespace EvilCar.BL
             string userName;
 
             Console.WriteLine("You are abbout to premanently delete a fleet manager.");
-            Console.WriteLine("Please enter the userName of the manager.");
-            userName = Console.ReadLine();
-            while (inputService.validInput(userName))
-            {
-                Console.WriteLine("Enter an userName to get their details.");
-                userName = Console.ReadLine();
-            }
+            userName = inputService.validInput("Please enter the userName of the manager.");
 
             EvilCarUser user = fetchUserInfo("manager", userName);
 
@@ -155,14 +138,8 @@ namespace EvilCar.BL
         {
             string name;
 
-
             Console.WriteLine("You choose to add a new branch.\n Please enter a name for the new branch.");
-            name = Console.ReadLine();
-            while (inputService.validInput(name))
-            {
-                Console.WriteLine("Please enter a name for the new branch.");
-                name = Console.ReadLine();
-            }            
+            name = inputService.validInput("Please enter a name for the new branch.");   
             Branch newBranch = new Branch();
             newBranch.Name = name;
             newBranch.BranchId = Guid.NewGuid();

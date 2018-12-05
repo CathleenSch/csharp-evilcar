@@ -12,7 +12,7 @@ namespace EvilCar.BL
         XmlManager xmlManager;
         LoginManager loginManager;
         EmailManager emailManager = new EmailManager();
-        Services userService = new Services();
+        Services inputServices = new Services();
 
         public UserManager(string xmlPath)
         {
@@ -26,15 +26,14 @@ namespace EvilCar.BL
          * interface between user communication and xml "database" conversion
         */
         //Create new user based on userType passed as parameter
+        //automatically generate unique username
         public EvilCarUser newUser(EvilCarUser.UserType type)
         {
             EvilCarUser newUser = new EvilCarUser();
 
-            Console.WriteLine("Please enter their first name.");
-            newUser.FirstName = Console.ReadLine();
-            Console.WriteLine("Enter their last Name.");
-            newUser.LastName = Console.ReadLine();
-            newUser.UserName = userService.generateUsername(newUser.FirstName, newUser.LastName);
+            newUser.FirstName = inputServices.validInput("Please enter their first name.");
+            newUser.LastName = inputServices.validInput("Enter their last Name.");
+            newUser.UserName = inputServices.generateUsername(newUser.FirstName, newUser.LastName);
             Console.WriteLine("Automatically generate username is, {0}.", newUser.UserName);
 
             newUser.Type = type;
@@ -86,8 +85,7 @@ namespace EvilCar.BL
             if(id == Guid.Empty)
             {
                 string userName;
-                Console.WriteLine("Enter the username for the user whose information needs changing.");
-                userName = Console.ReadLine();
+                userName = inputServices.validInput("Enter the username for the user whose information needs changing.");
                 EvilCarUser user = xmlManager.getUserInformation(type, userName);
                 userId = user.UserID;
             } 

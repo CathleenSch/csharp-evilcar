@@ -17,6 +17,7 @@ namespace EvilCar.BL
         FleetManager fleetManager;
         UserManager customerManager;
         UserManager userManager;
+        Services inputService = new Services();
 
 
         //Constructor
@@ -41,12 +42,13 @@ namespace EvilCar.BL
             customerManager.newUser(EvilCarUser.UserType.CUSTOMER);
         }
 
+        //Get Customer information from customer DB
         public void ReadCustomerInfo()
         {
-            Console.WriteLine("You are requesting info about a customer.");
             string searchInput;
-            Console.WriteLine("Enter an userName to get their details.");
-            searchInput = Console.ReadLine();
+
+            Console.WriteLine("You are requesting info about a customer.");
+            searchInput = inputService.validInput("Enter an userName to get their details.");
             Console.WriteLine("You requested info on {0}", searchInput);
             customerManager.fetchUserInfo("customer", searchInput);
         }

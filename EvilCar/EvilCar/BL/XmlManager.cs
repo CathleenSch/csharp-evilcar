@@ -20,7 +20,8 @@ namespace EvilCar.BL
         }
 
         #region userManagement
-        //find a user based on their userName
+        //find a user based on their userName and their type (customer, manager, admin)
+        //return the found user
         public EvilCarUser getUserInformation(string type, string searchInput)
         {
             EvilCarUser user = new EvilCarUser();
@@ -136,6 +137,7 @@ namespace EvilCar.BL
 
 
         #region Car and Fleet Management
+        //add a car node to the fleet DB
         public void newCarNode(Car car)
         {
             string nodeCollection = "fleetDB/carDB";
@@ -170,6 +172,8 @@ namespace EvilCar.BL
             doc.Save(location);
         }
 
+        //fetch fleet information from fleet DB
+        //return fleet object
         public Fleet getFleetInformation(Guid id)
         {
             Fleet fleet = new Fleet();
@@ -188,6 +192,8 @@ namespace EvilCar.BL
             return fleet;
         }
 
+        //get all cars in a fleet based on the fleet Id
+        //returns list of all cars
         public List<Car> getCarInformation(Guid fleetId)
         {
             List<Car> cars = new List<Car>();
@@ -213,6 +219,8 @@ namespace EvilCar.BL
             return cars;
         }
 
+        //create a new branch node
+        //add node to fleet DB
         public void newBranchNode(Branch branch)
         {
             string nodeCollection = "fleetDB/branches";
@@ -236,9 +244,11 @@ namespace EvilCar.BL
             doc.Save(location);
         }
 
-        public void newManagerNode(Guid managerId, string branchName)
+        //create new manager node
+        //add the manager to the fleet specified via name in the parameters
+        public void newManagerNode(Guid managerId, string fleetName)
         {
-            XmlNode branch = findNodeBasedOnAttributeValue("fleet", "name", branchName);
+            XmlNode branch = findNodeBasedOnAttributeValue("fleet", "name", fleetName);
             if(branch == null)
             {
 
@@ -258,6 +268,8 @@ namespace EvilCar.BL
             doc.Save(location);
         }
 
+        //get and return all available Services from the fleet DB
+        //contains information on their name, description and fee
         public List<Service> availableServices()
         {
             List<Service> services = new List<Service>();
@@ -277,6 +289,10 @@ namespace EvilCar.BL
         #endregion
 
         #region General
+        /* region used for general functions
+         * required for several tasks related to communicating with the xml
+         */
+         //remove a node from any xml DB
         public void removeNode(string elementName, string attribute, string searchValue)
         {
             XmlNode parentNode;
@@ -298,6 +314,8 @@ namespace EvilCar.BL
             }
         }
 
+        //check wether a node has children
+        //return number of children
         private int checkChildCount(XmlNode node)
         {
             int count = node.ChildNodes.Count;
@@ -308,6 +326,7 @@ namespace EvilCar.BL
 
         #region HelperFunctions
         //change the value of an already existing node attribute
+        //use guid attribute to identify node which needs changing
         public void changeInformationBasedOnGuid(string element, string guid, string attribute, string value)
         {
             XmlNode node = findNodeBasedOnAttributeValue(element, "guid", guid);
@@ -323,6 +342,7 @@ namespace EvilCar.BL
             return xnList[0];
         }
 
+        //find all nodes that have a specific attribute
         private XmlNodeList findNodesBasedOnAttributeValue(string elementName, string attribute, string searchValue)
         {
             string searchQuery = "//" + elementName + "[@" + attribute + "='" + searchValue + "']";
